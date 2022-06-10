@@ -5,3 +5,25 @@
 .mat-drawer {
   width: 300px;
 }
+
+$toolbar-height: 64px;
+
+.mat-toolbar-single-row {
+  height: $toolbar-height;
+}
+
+.main-layout-container {
+  border: none;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-toolbar {
+  position: sticky;
+  top: 0;
+}
