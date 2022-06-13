@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { IPost } from '../../utils/interfaces';
 
 @Component({
   selector: 'app-posts-list',
   templateUrl: './posts-list.component.html',
   styleUrls: ['./posts-list.component.scss']
 })
-export class PostsListComponent implements OnInit {
+export class PostsListComponent {
+  @Input() posts: IPost[] | undefined;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  onScroll(): void {
+    console.log('SCROLLING');
   }
-
 }

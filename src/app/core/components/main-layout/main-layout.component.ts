@@ -16,4 +16,8 @@ export class MainLayoutComponent {
   toggleDrawer(): void {
     this.drawer.toggle();
   }
+
+  onScrollToBottom(): void {
+    console.log('SCROLLING');
+  }
 }
