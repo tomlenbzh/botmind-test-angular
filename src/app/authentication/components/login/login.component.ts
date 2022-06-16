@@ -1,7 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoginFormControlsNames } from '../../utils/constants';
-import { ILoginCredentials } from '../../utils/interfaces';
+import { IUser } from '../../utils/interfaces';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +9,10 @@ import { ILoginCredentials } from '../../utils/interfaces';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  @Output() loginClicked: EventEmitter<ILoginCredentials> = new EventEmitter<ILoginCredentials>();
+  @Input() isLoading!: boolean | null;
+  @Input() errorMessage!: string | null;
+
+  @Output() loginClicked: EventEmitter<IUser> = new EventEmitter<IUser>();
 
   controlNames = LoginFormControlsNames;
   form!: FormGroup;
@@ -30,7 +33,7 @@ export class LoginComponent implements OnInit {
 
   submitForm(): void {
     if (this.form.valid) {
-      const credentials: ILoginCredentials = this.form.getRawValue();
+      const credentials: IUser = this.form.getRawValue();
       this.loginClicked.emit(credentials);
     }
   }

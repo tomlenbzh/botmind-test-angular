@@ -1,20 +1,31 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule, Routes } from '@angular/router';
 import { MainLayoutContainerComponent } from './core/containers/main-layout-container/main-layout-container.component';
+import { AuthenticationGuard } from './shared/guards/auth.guard';
 
-const mainChildren: Route[] = [
+const layoutChildren: Route[] = [
   {
     path: 'posts',
     loadChildren: () => import('./posts/posts.module').then((m) => m.PostsModule),
     data: { title: 'POSTS' }
-  }
+  },
+  { path: '', redirectTo: 'posts', pathMatch: 'full' }
 ];
 
 const routes: Routes = [
-  // { path: '', loadChildren: () => import('./authentication/authentication.module').then((m) => m.AuthenticationModule) }
-  { path: '', component: MainLayoutContainerComponent, children: mainChildren },
-  // canActivate: [AuthGuard]
-  { path: '**', redirectTo: 'posts' }
+  {
+    path: 'auth',
+    loadChildren: () => import('./authentication/authentication.module').then((m) => m.AuthenticationModule),
+    canActivate: [AuthenticationGuard]
+  },
+  {
+    path: 'app',
+    component: MainLayoutContainerComponent,
+    children: layoutChildren,
+    canActivate: [AuthenticationGuard]
+  },
+  { path: '', redirectTo: 'auth', pathMatch: 'full' },
+  { path: '**', redirectTo: 'app' }
 ];
 
 @NgModule({

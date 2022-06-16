@@ -1,6 +1,6 @@
 <div class="form-header">
   <h2>Log into the app</h2>
-  <p>No account ? Create one <strong [routerLink]="['/auth/signup']">here</strong></p>
+  <p>No account ? Create one <strong class="cursor-pointer" [routerLink]="['/auth/signup']">here</strong></p>
 </div>
 
 <form [formGroup]="form" (ngSubmit)="submitForm()">
@@ -27,11 +27,13 @@
     <input matInput type="password" [formControlName]="controlNames.PASSWORD" />
 
     <mat-error *ngIf="passwordCtrl?.invalid && (passwordCtrl?.dirty || passwordCtrl?.touched)">
-      <ng-container *ngIf="passwordCtrl?.hasError('required')"> Password is <strong>required</strong> </ng-container>
+      <ng-container *ngIf="passwordCtrl?.hasError('required')">Password is <strong>required</strong> </ng-container>
     </mat-error>
 
     <mat-icon matSuffix>lock</mat-icon>
   </mat-form-field>
 
-  <button mat-flat-button color="primary" type="submit">Log in</button>
+  <button mat-flat-button color="primary" type="submit" [disabled]="isLoading">Log in</button>
+
+  <p class="text-danger text-center mt30">{{ errorMessage }}</p>
 </form>

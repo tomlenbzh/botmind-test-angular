@@ -8,11 +8,6 @@ import { SignupContainerComponent } from './containers/signup/signup-container.c
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'auth',
-    pathMatch: 'full'
-  },
-  {
-    path: 'auth',
     component: AuthenticationContainerComponent,
     children: [
       { path: '', redirectTo: 'login', pathMatch: 'full' },

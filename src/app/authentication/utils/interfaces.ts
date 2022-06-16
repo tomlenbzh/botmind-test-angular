@@ -1,10 +1,18 @@
-export interface ILoginCredentials {
-  email: string;
-  password: string;
+export enum UserRole {
+  ADMIN = 'admin',
+  USER = 'user'
 }
 
-export interface ISignUpCredentials {
-  email: string;
-  password: string;
-  userName: string;
+export interface IUser {
+  id?: number;
+  name?: string;
+  userName?: string;
+  email?: string;
+  password?: string;
+  role?: UserRole;
+}
+
+export interface LoginInfo {
+  token: string;
+  user: IUser;
 }

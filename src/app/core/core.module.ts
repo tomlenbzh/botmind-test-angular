@@ -11,9 +11,17 @@ import { SharedModule } from '../shared/shared.module';
 import { components } from './components';
 import { containers } from './containers';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { StoreModule } from '@ngrx/store';
+import { environment } from 'src/environments/environment.prod';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from '../store/authentication/effects/authentication.effects';
+import { reducers, metaReducers } from '../store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
+import { UserInfoComponent } from './components/user-info/user-info.component';
 
 @NgModule({
-  declarations: [AppComponent, ...components, ...containers],
+  declarations: [AppComponent, ...components, ...containers, UserInfoComponent],
   imports: [
     CommonModule,
     SharedModule,
@@ -21,7 +29,11 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     BrowserAnimationsModule,
     HttpClientModule,
     RouterModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    EffectsModule.forRoot([AuthEffects]),
+    StoreRouterConnectingModule.forRoot({ routerState: RouterState.Minimal })
   ],
   providers: [],
   exports: []
