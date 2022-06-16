@@ -10,6 +10,6 @@ export class PostsListComponent {
   @Input() posts: IPost[] | undefined;
 
   onScroll(): void {
-    console.log('SCROLLING');
+    // console.log('SCROLLING');
   }
 }

@@ -5,6 +5,7 @@ export enum LoginFormControlsNames {
 
 export enum SignupFormControlsNames {
   USERNAME = 'userName',
+  NAME = 'name',
   EMAIL = 'email',
   PASSWORD = 'password',
   PASSWORD_CONFIRMATION = 'passwordConfirmation'

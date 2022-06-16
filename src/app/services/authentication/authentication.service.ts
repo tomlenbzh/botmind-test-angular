@@ -1,0 +1,36 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ACCESS_TOKEN } from 'src/app/authentication/utils/constants/authentication.constants';
+import { IUser } from 'src/app/authentication/utils/interfaces';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthenticationService {
+  private baseUrl = 'http://localhost:3000';
+
+  constructor(private httpClient: HttpClient) {}
+
+  login(credentials: IUser): Observable<any> {
+    const url = `${this.baseUrl}/users/login`;
+    return this.httpClient.post<any>(url, credentials);
+  }
+
+  signUp(credentials: IUser): Observable<any> {
+    const url = `${this.baseUrl}/users`;
+    return this.httpClient.post<any>(url, credentials);
+  }
+
+  getAccessToken(): string | null {
+    return localStorage.getItem(ACCESS_TOKEN);
+  }
+
+  setAccessToken(token: string): void {
+    localStorage.setItem(ACCESS_TOKEN, token);
+  }
+
+  clearToken(): void {
+    localStorage.removeItem(ACCESS_TOKEN);
+  }
+}

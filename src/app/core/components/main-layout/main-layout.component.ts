@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatDrawer, MatDrawerMode } from '@angular/material/sidenav';
 
 @Component({
@@ -11,6 +11,8 @@ export class MainLayoutComponent {
   @Input() hasBackdrop: boolean = false;
   @Input() opened: boolean = true;
 
+  @Output() loggedOut: EventEmitter<any> = new EventEmitter<any>();
+
   @ViewChild('drawer') drawer!: MatDrawer;
 
   toggleDrawer(): void {
@@ -18,6 +20,10 @@ export class MainLayoutComponent {
   }
 
   onScrollToBottom(): void {
-    console.log('SCROLLING');
+    // console.log('SCROLLING');
+  }
+
+  logout(): void {
+    this.loggedOut.emit();
   }
 }

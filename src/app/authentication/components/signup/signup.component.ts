@@ -1,7 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SignupFormControlsNames } from '../../utils/constants';
-import { ISignUpCredentials } from '../../utils/interfaces';
+import { IUser } from '../../utils/interfaces';
 import { passwordMatchValidator } from '../../utils/validators/check-passwords';
 import { CustomErrorStateMatcher } from '../../utils/validators/state-matcher';
 
@@ -11,7 +11,10 @@ import { CustomErrorStateMatcher } from '../../utils/validators/state-matcher';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
-  @Output() signUpClicked: EventEmitter<ISignUpCredentials> = new EventEmitter<ISignUpCredentials>();
+  @Input() isLoading!: boolean | null;
+  @Input() errorMessage!: string | null;
+
+  @Output() signUpClicked: EventEmitter<IUser> = new EventEmitter<IUser>();
 
   controlNames = SignupFormControlsNames;
   form!: FormGroup;
@@ -33,6 +36,10 @@ export class SignupComponent implements OnInit {
     return this.form.get(this.controlNames.USERNAME);
   }
 
+  get nameCtrl() {
+    return this.form.get(this.controlNames.NAME);
+  }
+
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
@@ -41,7 +48,7 @@ export class SignupComponent implements OnInit {
 
   submitForm(): void {
     if (this.form.valid) {
-      const credentials: ISignUpCredentials = this.form.getRawValue();
+      const credentials: IUser = this.form.getRawValue();
       this.signUpClicked.emit(credentials);
     }
   }
@@ -55,6 +62,7 @@ export class SignupComponent implements OnInit {
       {
         [this.controlNames.EMAIL]: new FormControl('', [Validators.required, Validators.email]),
         [this.controlNames.USERNAME]: new FormControl('', [Validators.required]),
+        [this.controlNames.NAME]: new FormControl('', [Validators.required]),
         [this.controlNames.PASSWORD]: new FormControl('', [Validators.required]),
         [this.controlNames.PASSWORD_CONFIRMATION]: new FormControl('', [Validators.required])
       },
