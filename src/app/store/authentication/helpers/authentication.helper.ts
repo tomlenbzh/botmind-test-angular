@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { ACCESS_TOKEN } from 'src/app/authentication/utils/constants/authentication.constants';
 import { AppState } from 'src/app/store';
 import { IUser } from '../../../authentication/utils/interfaces';
 import { LOGIN_ACTION, LOGOUT_ACTION, SIGNUP_ACTION } from '../actions/authentications.actions';
@@ -30,5 +31,17 @@ export class AuthenticationHelper {
 
   logout(): void {
     this.store.dispatch(LOGOUT_ACTION());
+  }
+
+  getAccessToken(): string | null {
+    return localStorage.getItem(ACCESS_TOKEN);
+  }
+
+  setAccessToken(token: string): void {
+    localStorage.setItem(ACCESS_TOKEN, token);
+  }
+
+  clearToken(): void {
+    localStorage.removeItem(ACCESS_TOKEN);
   }
 }

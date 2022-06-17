@@ -1,6 +1,6 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -19,6 +19,10 @@ import { reducers, metaReducers } from '../store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { UserInfoComponent } from './components/user-info/user-info.component';
+import { ProfileEffects } from '../store/profile/effects/profile.effects';
+import { ProfileModule } from '../profile/profile.module';
+import { TokenInterceptor } from '../shared/interceptors/headers.interceptor';
+import { UnauthorizedInterceptor } from '../shared/interceptors/unauthorized.interceptor';
 
 @NgModule({
   declarations: [AppComponent, ...components, ...containers, UserInfoComponent],
@@ -32,10 +36,22 @@ import { UserInfoComponent } from './components/user-info/user-info.component';
     InfiniteScrollModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    EffectsModule.forRoot([AuthEffects]),
-    StoreRouterConnectingModule.forRoot({ routerState: RouterState.Minimal })
+    EffectsModule.forRoot([AuthEffects, ProfileEffects]),
+    StoreRouterConnectingModule.forRoot({ routerState: RouterState.Minimal }),
+    ProfileModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: UnauthorizedInterceptor,
+      multi: true
+    }
+  ],
   exports: []
 })
 export class CoreModule {
