@@ -21,16 +21,4 @@ export class AuthenticationService {
     const url = `${this.baseUrl}/users`;
     return this.httpClient.post<any>(url, credentials);
   }
-
-  getAccessToken(): string | null {
-    return localStorage.getItem(ACCESS_TOKEN);
-  }
-
-  setAccessToken(token: string): void {
-    localStorage.setItem(ACCESS_TOKEN, token);
-  }
-
-  clearToken(): void {
-    localStorage.removeItem(ACCESS_TOKEN);
-  }
 }

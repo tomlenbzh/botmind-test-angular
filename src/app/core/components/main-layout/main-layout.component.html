@@ -1,5 +1,7 @@
 <mat-drawer-container class="main-layout-container" [hasBackdrop]="hasBackdrop">
-  <mat-drawer #drawer [mode]="mode" [opened]="opened">I'm a drawer</mat-drawer>
+  <mat-drawer #drawer [mode]="mode" [opened]="opened">
+    <app-profile-container></app-profile-container>
+  </mat-drawer>
 
   <mat-drawer-content>
     <mat-toolbar>

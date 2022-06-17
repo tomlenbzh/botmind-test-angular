@@ -1,9 +1,7 @@
 import { Injectable, Injector } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
-// import { AuthenticationService } from '../../services/authentication.service';
-// import { User } from 'src/app/models/auth.model';
+import { AuthenticationHelper } from 'src/app/store/authentication/helpers/authentication.helper';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +9,7 @@ import { AuthenticationService } from 'src/app/services/authentication/authentic
 export class TokenInterceptor implements HttpInterceptor {
   private excludedUrls: Array<string>;
 
-  constructor(private injector: Injector, private authService: AuthenticationService) {
+  constructor(private injector: Injector, private authHelper: AuthenticationHelper) {
     this.excludedUrls = ['login'];
   }
 
@@ -22,8 +20,8 @@ export class TokenInterceptor implements HttpInterceptor {
    * Retrieves and injects access token in every new Http request
    */
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    this.authService = this.injector.get(AuthenticationService);
-    const accessToken: string | null = this.authService.getAccessToken();
+    this.authHelper = this.injector.get(AuthenticationHelper);
+    const accessToken: string | null = this.authHelper.getAccessToken();
 
     if (this.checkExcludedUrl(request.url) === true) {
       request = request.clone({ setHeaders: { 'Content-Type': 'application/json' } });
@@ -31,9 +29,8 @@ export class TokenInterceptor implements HttpInterceptor {
       if (accessToken) {
         request = request.clone({
           setHeaders: {
-            'x-token': accessToken,
             'Content-Type': 'application/json',
-            Authorization: 'Basic YXJ0c3BlcjpoVGsxZEE3ZmVBdDI='
+            Authorization: `Bearer ${accessToken}`
           }
         });
       }

@@ -5,7 +5,6 @@ import { of, tap } from 'rxjs';
 import { catchError, exhaustMap, map } from 'rxjs/operators';
 import { IUser, LoginInfo } from 'src/app/authentication/utils/interfaces';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
-import { ACCESS_TOKEN } from '../../../authentication/utils/constants/authentication.constants';
 import {
   LOGIN_ACTION,
   LOGIN_ERROR_ACTION,
@@ -45,7 +44,7 @@ export class AuthEffects {
       return this.actions$.pipe(
         ofType(LOGIN_SUCCESS_ACTION),
         tap((action) => {
-          this.authService.setAccessToken(action.token);
+          this.authHelper.setAccessToken(action.token);
           this.router.navigateByUrl('/app');
         })
       );
@@ -57,7 +56,7 @@ export class AuthEffects {
     () => {
       return this.actions$.pipe(
         ofType(LOGIN_ERROR_ACTION),
-        tap(() => this.authService.clearToken())
+        tap(() => this.authHelper.clearToken())
       );
     },
     {
@@ -70,7 +69,7 @@ export class AuthEffects {
       return this.actions$.pipe(
         ofType(LOGOUT_ACTION),
         tap(() => {
-          this.authService.clearToken();
+          this.authHelper.clearToken();
           this.router.navigateByUrl('/auth');
         })
       );
