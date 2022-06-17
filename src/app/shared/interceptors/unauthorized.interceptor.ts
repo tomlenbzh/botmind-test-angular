@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { ACCESS_TOKEN } from 'src/app/authentication/utils/constants/authentication.constants';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,8 @@ export class UnauthorizedInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((error: any) => {
         if (error instanceof HttpErrorResponse && error.status === 401) {
-          localStorage.removeItem('userProfile');
-          this.router.navigateByUrl('/login');
+          localStorage.removeItem(ACCESS_TOKEN);
+          this.router.navigateByUrl('/auth');
         }
         return throwError(() => new Error(error));
       })

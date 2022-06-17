@@ -13,16 +13,16 @@ export class ProfileService {
 
   fetchProfile(id: number): Observable<IUser> {
     const url = `${this.baseUrl}/users/${id}`;
-    return this.httpClient.get<any>(url);
+    return this.httpClient.get<IUser>(url);
   }
 
   updateProfile(id: number, user: IUser): Observable<IUser> {
     const url = `${this.baseUrl}/users/${id}`;
-    return this.httpClient.put<any>(url, { user });
+    return this.httpClient.put<IUser>(url, { user });
   }
 
   deletProfile(id: number): Observable<IUser> {
     const url = `${this.baseUrl}/users/${id}`;
-    return this.httpClient.delete<any>(url);
+    return this.httpClient.delete<IUser>(url);
   }
 }

@@ -1,12 +1,14 @@
+$toolbar-height: 64px;
+
 .main-content {
   padding: 20px;
+  height: calc(100vh - #{$toolbar-height});
+  overflow: auto;
 }
 
 .mat-drawer {
   width: 300px;
 }
-
-$toolbar-height: 64px;
 
 .mat-toolbar {
   height: $toolbar-height;

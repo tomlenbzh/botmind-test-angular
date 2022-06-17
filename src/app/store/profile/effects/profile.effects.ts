@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
-import { of, tap } from 'rxjs';
+import { of } from 'rxjs';
 import { catchError, exhaustMap, map } from 'rxjs/operators';
-import { IUser, LoginInfo } from 'src/app/authentication/utils/interfaces';
-import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { IUser } from 'src/app/authentication/utils/interfaces';
 import { ProfileService } from 'src/app/services/users/profile.service';
 import {
   DELETE_PROFILE_ACTION,

@@ -12,15 +12,10 @@ export class MainLayoutComponent {
   @Input() opened: boolean = true;
 
   @Output() loggedOut: EventEmitter<any> = new EventEmitter<any>();
-
   @ViewChild('drawer') drawer!: MatDrawer;
 
   toggleDrawer(): void {
     this.drawer.toggle();
-  }
-
-  onScrollToBottom(): void {
-    // console.log('SCROLLING');
   }
 
   logout(): void {

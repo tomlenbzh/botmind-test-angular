@@ -1,3 +1,10 @@
+$toolbar-height: 64px;
+
+.posts-list {
+  height: calc(100vh - #{$toolbar-height});
+  overflow: auto;
+}
+
 .post-card {
   margin-bottom: 20px;
 
@@ -23,8 +30,13 @@
         flex-direction: column;
         justify-content: center;
 
-        .user-name {
+        .title {
           font-size: 35px;
+        }
+
+        .user-name {
+          font-size: 20px;
+          margin-bottom: 20px;
         }
 
         .date-created {

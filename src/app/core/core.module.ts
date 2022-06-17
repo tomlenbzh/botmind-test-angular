@@ -23,6 +23,7 @@ import { ProfileEffects } from '../store/profile/effects/profile.effects';
 import { ProfileModule } from '../profile/profile.module';
 import { TokenInterceptor } from '../shared/interceptors/headers.interceptor';
 import { UnauthorizedInterceptor } from '../shared/interceptors/unauthorized.interceptor';
+import { PostsEffects } from '../store/posts/effects/posts.effects';
 
 @NgModule({
   declarations: [AppComponent, ...components, ...containers, UserInfoComponent],
@@ -36,7 +37,7 @@ import { UnauthorizedInterceptor } from '../shared/interceptors/unauthorized.int
     InfiniteScrollModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    EffectsModule.forRoot([AuthEffects, ProfileEffects]),
+    EffectsModule.forRoot([AuthEffects, ProfileEffects, PostsEffects]),
     StoreRouterConnectingModule.forRoot({ routerState: RouterState.Minimal }),
     ProfileModule
   ],

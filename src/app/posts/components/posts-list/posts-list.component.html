@@ -1,22 +1,19 @@
-<div
-  class="posts-list"
-  infiniteScroll
-  [infiniteScrollDistance]="2"
-  [infiniteScrollThrottle]="50"
-  (scrolled)="onScroll()"
->
+<div class="posts-list" infinite-scroll [scrollWindow]="false" (scrolled)="onScroll()">
+  <app-post-form [currentUser]="currentUser" (postSubmitted)="submitPost($event)"></app-post-form>
+
   <mat-card class="post-card" *ngFor="let post of posts">
     <div class="post-header">
       <div class="post-info">
-        <img [src]="post.user.image" class="user-image" [alt]="post.user.name" />
+        <!-- <img [src]="post?.user?.image" class="user-image" [alt]="post?.user?.name" /> -->
         <div class="user-info">
-          <h2 class="user-name">{{ post.user.name }}</h2>
-          <p class="date-created">{{ post.createdAt }}</p>
+          <h2 class="title">{{ post?.title }}</h2>
+          <p class="user-name">{{ post?.user?.userName }}</p>
+          <p class="date-created">{{ post?.createdAt }}</p>
         </div>
       </div>
     </div>
     <div class="post-body">
-      {{ post?.content }}
+      {{ post?.body }}
     </div>
   </mat-card>
 </div>
