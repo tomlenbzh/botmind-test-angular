@@ -7,13 +7,7 @@ import { ProfileHelper } from 'src/app/store/profile/helpers/profile.helper';
 
 @Component({
   selector: 'app-user-feed-container',
-  template: `<app-posts-list
-    [posts]="postsList | async"
-    [meta]="meta | async"
-    [currentUser]="currentUser"
-    [canAdd]="false"
-    (scrolled)="fetchMore($event)"
-  ></app-posts-list>`
+  template: '<app-user-feed></app-user-feed>'
 })
 export class UserFeedContainerComponent implements OnInit {
   postsList!: Observable<IPost[] | null>;

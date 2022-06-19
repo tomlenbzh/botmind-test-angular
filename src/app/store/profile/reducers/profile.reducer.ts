@@ -27,13 +27,13 @@ export const profileReducer = createReducer(
   on(FETCH_PROFILE_ACTION, (state: ProfileState): ProfileState => ({ ...state, isLoading: true })),
   on(
     FETCH_PROFILE_SUCCESS_ACTION,
-    (state: ProfileState, { profile }): ProfileState => ({ ...state, isLoading: false, profile })
+    (state: ProfileState, { user }): ProfileState => ({ ...state, isLoading: false, profile: user })
   ),
   on(FETCH_PROFILE_ERROR_ERROR, (state: ProfileState): ProfileState => ({ ...state, isLoading: false })),
   on(UPDATE_PROFILE_ACTION, (state: ProfileState): ProfileState => ({ ...state, isLoading: true })),
   on(
     UPDATE_PROFILE_SUCCESS_ACTION,
-    (state: ProfileState, { profile }): ProfileState => ({ ...state, isLoading: false, profile })
+    (state: ProfileState, { user }): ProfileState => ({ ...state, isLoading: false, profile: user })
   ),
   on(UPDATE_PROFILE_ERROR_ACTION, (state: ProfileState): ProfileState => ({ ...state, isLoading: false })),
 

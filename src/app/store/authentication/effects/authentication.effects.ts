@@ -5,6 +5,7 @@ import { of, tap } from 'rxjs';
 import { catchError, exhaustMap, map } from 'rxjs/operators';
 import { IUser, LoginInfo } from 'src/app/authentication/utils/interfaces';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { SELECTED_LANGUAGE } from 'src/app/shared/constants/constants';
 import {
   LOGIN_ACTION,
   LOGIN_ERROR_ACTION,
@@ -33,10 +34,7 @@ export class AuthEffects {
           map((loginInfo: LoginInfo) => {
             return LOGIN_SUCCESS_ACTION(loginInfo);
           }),
-          catchError((error) => {
-            console.log('ERROR', error);
-            return of(LOGIN_ERROR_ACTION({ error }));
-          })
+          catchError((error) => of(LOGIN_ERROR_ACTION({ error })))
         )
       )
     );
@@ -73,6 +71,7 @@ export class AuthEffects {
         ofType(LOGOUT_ACTION),
         tap(() => {
           this.authHelper.clearToken();
+          localStorage.removeItem(SELECTED_LANGUAGE);
           this.router.navigateByUrl('/auth');
         })
       );

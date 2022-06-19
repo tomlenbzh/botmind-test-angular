@@ -16,5 +16,6 @@ export enum PostsActionTypes {
   LIKE_POSTS_ERROR = '[POSTS] Like Post Error',
   REMOVE_LIKE_POSTS = '[POSTS] Remove like Post',
   REMOVE_LIKE_POSTS_SUCCESS = '[POSTS] Remove like Post Success',
-  REMOVE_LIKE_POSTS_ERROR = '[POSTS] Remove like Post Error'
+  REMOVE_LIKE_POSTS_ERROR = '[POSTS] Remove like Post Error',
+  RESET_POSTS_STATE = '[POSTS] Reset post state'
 }

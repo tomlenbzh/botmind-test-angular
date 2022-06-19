@@ -24,8 +24,8 @@ export class ProfileHelper {
     this.store.dispatch(FETCH_PROFILE_ACTION({ id }));
   }
 
-  updateProfile(id: number, profile: IUser): void {
-    this.store.dispatch(UPDATE_PROFILE_ACTION({ id, profile }));
+  updateProfile(id: number, user: IUser): void {
+    this.store.dispatch(UPDATE_PROFILE_ACTION({ id, user }));
   }
 
   deleteProfile(id: number): void {

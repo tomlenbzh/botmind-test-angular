@@ -1,39 +1,50 @@
 <div class="form-header">
-  <h2>Log into the app</h2>
-  <p>No account ? Create one <strong class="cursor-pointer" [routerLink]="['/auth/signup']">here</strong></p>
+  <h2 [textContent]="'LOGIN.TITLE' | translate"></h2>
+  <p>
+    <span [textContent]="'LOGIN.REGISTER' | translate"></span>
+    <strong class="cursor-pointer" [routerLink]="['/auth/signup']" [textContent]="'LOGIN.HERE' | translate"></strong>
+  </p>
 </div>
 
 <form [formGroup]="form" (ngSubmit)="submitForm()">
   <!-- EMAIL FORM FIELD -->
-  <mat-form-field appearance="outline">
-    <mat-label>Email</mat-label>
-    <input matInput type="email" [formControlName]="controlNames.EMAIL" />
-
+  <mat-form-field appearance="outline" class="mb10">
+    <mat-label [textContent]="'LOGIN.FORM.EMAIL.NAME' | translate"></mat-label>
+    <input
+      matInput
+      type="email"
+      [formControlName]="controlNames.EMAIL"
+      [placeholder]="'LOGIN.FORM.EMAIL.PLACEHOLDER' | translate"
+    />
     <mat-error *ngIf="emailCtrl?.invalid && (emailCtrl?.dirty || emailCtrl?.touched)">
-      <ng-container *ngIf="emailCtrl?.hasError('email') && !emailCtrl?.hasError('required')">
-        Please enter a valid email address
-      </ng-container>
-      <ng-container *ngIf="emailCtrl?.hasError('required')">Email is <strong>required</strong> </ng-container>
+      <div
+        *ngIf="emailCtrl?.hasError('email') && !emailCtrl?.hasError('required')"
+        [innerHTML]="'LOGIN.ERRORS.VALID_EMAIL' | translate"
+      ></div>
+      <div *ngIf="emailCtrl?.hasError('required')" [innerHTML]="'LOGIN.ERRORS.EMAIL_REQUIRED' | translate"></div>
     </mat-error>
-
     <mat-icon matSuffix>email</mat-icon>
   </mat-form-field>
 
   <br />
 
-  <!-- PASSWORD FORM FIELD -->
-  <mat-form-field appearance="outline">
-    <mat-label>Password</mat-label>
+  <!-- +++++ PASSWORD FORM FIELD +++++ -->
+  <mat-form-field appearance="outline" class="mb10">
+    <mat-label [textContent]="'LOGIN.FORM.PASSWORD.NAME' | translate"></mat-label>
     <input matInput type="password" [formControlName]="controlNames.PASSWORD" />
-
     <mat-error *ngIf="passwordCtrl?.invalid && (passwordCtrl?.dirty || passwordCtrl?.touched)">
-      <ng-container *ngIf="passwordCtrl?.hasError('required')">Password is <strong>required</strong> </ng-container>
+      <div *ngIf="passwordCtrl?.hasError('required')" [innerHTML]="'LOGIN.ERRORS.PASSWORD_REQUIRED' | translate"></div>
     </mat-error>
-
     <mat-icon matSuffix>lock</mat-icon>
   </mat-form-field>
 
-  <button mat-flat-button color="primary" type="submit" [disabled]="isLoading">Log in</button>
+  <button
+    mat-flat-button
+    color="primary"
+    type="submit"
+    [disabled]="isLoading"
+    [textContent]="'LOGIN.FORM.SUBMIT' | translate"
+  ></button>
 
-  <p class="text-danger text-center mt30">{{ errorMessage }}</p>
+  <p *ngIf="errorMessage" class="text-danger text-center mt30" [textContent]="errorMessage | translate"></p>
 </form>

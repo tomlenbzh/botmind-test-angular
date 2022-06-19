@@ -6,18 +6,29 @@ import jwt_decode from 'jwt-decode';
 import { IUser } from 'src/app/authentication/utils/interfaces';
 
 @Component({
-  template: `<app-main-layout (loggedOut)="logout()"></app-main-layout>`
+  template: `<app-main-layout
+    [profile]="profile | async"
+    (langChanged)="changeLang($event)"
+    (loggedOut)="logout()"
+  ></app-main-layout>`
 })
 export class MainLayoutContainerComponent implements OnInit {
+  profile!: Observable<IUser | null>;
+
   constructor(private authHelper: AuthenticationHelper, private profileHelper: ProfileHelper) {}
 
   ngOnInit(): void {
+    this.profile = this.profileHelper.profile();
     this.getAccessToken().subscribe((token: string | null) => {
       if (token) {
         const userId: number | undefined = this.decodeToken(token);
         userId && this.profileHelper.fetchProfile(userId);
       }
     });
+  }
+
+  changeLang(profile: IUser): void {
+    if (profile.id) this.profileHelper.updateProfile(profile.id, profile);
   }
 
   logout(): void {

@@ -18,7 +18,7 @@ export class ProfileService {
 
   updateProfile(id: number, user: IUser): Observable<IUser> {
     const url = `${this.baseUrl}/users/${id}`;
-    return this.httpClient.put<IUser>(url, { user });
+    return this.httpClient.put<IUser>(url, user);
   }
 
   deletProfile(id: number): Observable<IUser> {

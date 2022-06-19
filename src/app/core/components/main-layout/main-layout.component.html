@@ -8,9 +8,27 @@
       <button mat-icon-button class="example-icon" (click)="toggleDrawer()">
         <mat-icon>menu</mat-icon>
       </button>
-      <span class="app-title">Botmind Test</span>
+
+      <span
+        class="app-title cursor-pointer"
+        [textContent]="'APP.TITLE' | translate"
+        [routerLink]="['/app']"
+        [matTooltip]="'APP.BACK_TO_MAIN_FEED' | translate"
+      ></span>
+
       <span class="example-spacer"></span>
-      <button mat-icon-button class="example-icon" aria-label="Exit" (click)="logout()">
+
+      <button mat-icon-button [matMenuTriggerFor]="menu" [matTooltip]="'APP.CHANGE_LANG' | translate">
+        <img class="flag" src="assets//images/{{ profile?.lang }}.png" />
+      </button>
+      <mat-menu #menu="matMenu" xPosition="before">
+        <button mat-menu-item class="lang-menu" *ngFor="let lang of acceptedLangs" (click)="changeLang(lang)">
+          <img class="flag mr20" src="assets//images/{{ lang }}.png" />
+          {{ lang }}
+        </button>
+      </mat-menu>
+
+      <button mat-icon-button [matTooltip]="'APP.LOGOUT' | translate" (click)="logout()">
         <mat-icon>exit_to_app</mat-icon>
       </button>
     </mat-toolbar>

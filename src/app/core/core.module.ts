@@ -1,6 +1,6 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -25,6 +25,10 @@ import { TokenInterceptor } from '../shared/interceptors/headers.interceptor';
 import { UnauthorizedInterceptor } from '../shared/interceptors/unauthorized.interceptor';
 import { PostsEffects } from '../store/posts/effects/posts.effects';
 
+// import ngx-translate and the http loader
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 @NgModule({
   declarations: [AppComponent, ...components, ...containers, UserInfoComponent],
   imports: [
@@ -33,6 +37,15 @@ import { PostsEffects } from '../store/posts/effects/posts.effects';
     BrowserModule.withServerTransition({ appId: 'app' }),
     BrowserAnimationsModule,
     HttpClientModule,
+    TranslateModule.forRoot({
+      defaultLanguage: 'fr',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      },
+      isolate: false
+    }),
     RouterModule,
     InfiniteScrollModule,
     StoreModule.forRoot(reducers, { metaReducers }),
@@ -68,4 +81,9 @@ export class CoreModule {
       providers: []
     };
   }
+}
+
+// required for AOT compilation
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
 }

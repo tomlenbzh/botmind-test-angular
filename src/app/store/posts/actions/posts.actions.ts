@@ -71,3 +71,8 @@ export const REMOVE_LIKE_POST_ERROR_ACTION = createAction(
   PostsActionTypes.REMOVE_LIKE_POSTS_ERROR,
   props<{ error: HttpErrorResponse }>()
 );
+
+/**
+ * RESET STATE
+ */
+export const RESET_POSTS_STATE_ACTION = createAction(PostsActionTypes.RESET_POSTS_STATE);

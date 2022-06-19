@@ -1,11 +1,14 @@
 <div class="posts-list" infinite-scroll [scrollWindow]="false" (scrolled)="onScroll()">
   <app-post-form *ngIf="canAdd" [currentUser]="currentUser" (postSubmitted)="submitPost($event)"></app-post-form>
 
+  <div class="no-posts" *ngIf="posts?.length === 0" [textContent]="'POSTS.NO_POSTS' | translate"></div>
+
   <app-post
     *ngFor="let post of posts"
     [post]="post"
     [currentUser]="currentUser"
     (like)="likePost($event)"
     (removelike)="removeLikePost($event)"
+    (delete)="deletePost($event)"
   ></app-post>
 </div>

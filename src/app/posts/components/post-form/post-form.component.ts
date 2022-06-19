@@ -11,11 +11,12 @@ import { IPost } from '../../utils/interfaces';
 })
 export class PostFormComponent implements OnInit {
   @Input() currentUser!: IUser | null;
+  @Output() postSubmitted: EventEmitter<IPost> = new EventEmitter<IPost>();
 
   controlNames = PostFormControlsNames;
   form!: FormGroup;
-
-  @Output() postSubmitted: EventEmitter<IPost> = new EventEmitter<IPost>();
+  titleMaxLength = 100;
+  bodyMaxLength = 500;
 
   get titleCtrl() {
     return this.form.get(this.controlNames.TITLE);

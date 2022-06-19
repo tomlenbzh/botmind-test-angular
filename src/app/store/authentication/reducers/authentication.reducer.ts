@@ -5,6 +5,7 @@ import {
   LOGIN_ERROR_ACTION,
   LOGIN_SUCCESS_ACTION,
   LOGOUT_ACTION,
+  RESET_AUTH_STATE_ACTION,
   SIGNUP_ACTION,
   SIGNUP_ERROR_ACTION,
   SIGNUP_SUCCESS_ACTION
@@ -68,5 +69,6 @@ export const authReducer = createReducer(
       isLoading: false,
       errorMessage: error.error.message
     })
-  )
+  ),
+  on(RESET_AUTH_STATE_ACTION, (): AuthState => initialState)
 );

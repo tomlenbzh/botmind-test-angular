@@ -1,13 +1,10 @@
 <mat-card class="post-card">
   <div class="post-header">
     <div class="post-info">
-      <!-- <img [src]="post?.user?.image" class="user-image" [alt]="post?.user?.name" /> -->
+      <img [src]="placeholder" class="user-image" [alt]="post?.user?.name" />
       <div class="user-info">
-        <h2 class="title">{{ post?.title }}</h2>
-        <p class="user-name">{{ post?.user?.userName }}</p>
-        <p class="date-created">{{ post?.createdAt }}</p>
-        <p>{{ likes }} people liked this post</p>
-        likedByCurrentUser: {{ likedByCurrentUser }} - isAuthor: {{ isAuthor }}
+        <p class="user-name text-bold" [textContent]="post?.user?.userName" (click)="gotToUser()"></p>
+        <p class="date-created" [textContent]="post?.createdAt"></p>
       </div>
     </div>
 
@@ -16,21 +13,45 @@
         mat-mini-fab
         aria-label="Example icon button with a heart icon"
         [color]="!likedByCurrentUser ? 'basic' : 'warn'"
+        [matTooltip]="(!likedByCurrentUser ? 'POSTS.ACTIONS.LIKE' : 'POSTS.ACTIONS.REMOVE_LIKE') | translate"
         (click)="manageLikes()"
       >
+        <div *ngIf="likes > 0" class="likes-count" [textContent]="likes"></div>
         <mat-icon>favorite</mat-icon>
       </button>
 
-      <button mat-mini-fab aria-label="Example icon button with a heart icon" *ngIf="isAuthor" color="basic">
+      <button mat-mini-fab *ngIf="isAuthor" color="basic" [matTooltip]="'POSTS.ACTIONS.EDIT' | translate">
         <mat-icon>edit</mat-icon>
       </button>
 
-      <button mat-mini-fab aria-label="Example icon button with a heart icon" *ngIf="isAuthor" color="basic">
+      <button
+        mat-mini-fab
+        *ngIf="isAuthor"
+        color="basic"
+        [matTooltip]="'POSTS.ACTIONS.DELETE' | translate"
+        (click)="openDeleteModal()"
+      >
         <mat-icon>delete</mat-icon>
       </button>
     </div>
   </div>
-  <div class="post-body">
-    {{ post?.body }}
-  </div>
+
+  <h2 class="title nomargin mt10" [textContent]="post?.title"></h2>
+  <div class="post-body" [textContent]="post?.body"></div>
 </mat-card>
+
+<ng-template #deletePostDialog>
+  <h1 mat-dialog-title [textContent]="'POSTS.DELETE_MODAL.TITLE' | translate"></h1>
+  <div mat-dialog-content>
+    <p [textContent]="'POSTS.DELETE_MODAL.BODY' | translate"></p>
+  </div>
+  <div mat-dialog-actions class="d-flex flex-row justify-content-between">
+    <button mat-button [textContent]="'POSTS.DELETE_MODAL.NO' | translate" (click)="closeDeleteModal()"></button>
+    <button
+      mat-raised-button
+      color="warn"
+      [textContent]="'POSTS.DELETE_MODAL.YES' | translate"
+      (click)="deletePost()"
+    ></button>
+  </div>
+</ng-template>

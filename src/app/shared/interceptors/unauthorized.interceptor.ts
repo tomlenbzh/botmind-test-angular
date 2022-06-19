@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { ACCESS_TOKEN } from 'src/app/authentication/utils/constants/authentication.constants';
+import { ACCESS_TOKEN } from '../constants/constants';
 
 @Injectable({
   providedIn: 'root'

@@ -1,43 +1,60 @@
 <div class="form-header">
-  <h2>Create an account</h2>
-  <p>Already got one ? Sign in <strong class="cursor-pointer" [routerLink]="['/auth/login']">here</strong></p>
+  <h2 [textContent]="'REGISTER.TITLE' | translate"></h2>
+  <p>
+    <span [textContent]="'REGISTER.LOGIN' | translate"></span>
+    <strong class="cursor-pointer" [routerLink]="['/auth/login']" [textContent]="'REGISTER.HERE' | translate"></strong>
+  </p>
 </div>
 
 <form [formGroup]="form" (ngSubmit)="submitForm()">
-  <!-- USERNAME FORM FIELD -->
-  <mat-form-field appearance="outline">
-    <mat-label>Username</mat-label>
-    <input matInput type="text" [formControlName]="controlNames.USERNAME" />
-
-    <mat-error *ngIf="passwordCtrl?.invalid && (passwordCtrl?.dirty || passwordCtrl?.touched)">
-      <ng-container *ngIf="passwordCtrl?.hasError('required')">Your username is <strong>required</strong></ng-container>
+  <!-- +++++ USERNAME FORM FIELD +++++ -->
+  <mat-form-field appearance="outline" class="mb10">
+    <mat-label [textContent]="'REGISTER.FORM.USERNAME.NAME' | translate"></mat-label>
+    <input
+      matInput
+      type="text"
+      [formControlName]="controlNames.USERNAME"
+      [placeholder]="'REGISTER.FORM.USERNAME.NAME' | translate"
+    />
+    <mat-error *ngIf="userNameCtrl?.invalid && (userNameCtrl?.dirty || userNameCtrl?.touched)">
+      <div
+        *ngIf="userNameCtrl?.hasError('required')"
+        [innerHTML]="'REGISTER.ERRORS.USERNAME_REQUIRED' | translate"
+      ></div>
     </mat-error>
-
     <mat-icon matSuffix>person</mat-icon>
   </mat-form-field>
 
-  <!-- USERNAME FORM FIELD -->
-  <mat-form-field appearance="outline">
-    <mat-label>Name</mat-label>
-    <input matInput type="text" [formControlName]="controlNames.NAME" placeholder="John Doe" />
-
+  <!-- +++++ USERNAME FORM FIELD +++++ -->
+  <mat-form-field appearance="outline" class="mb10">
+    <mat-label [textContent]="'REGISTER.FORM.NAME.NAME' | translate"></mat-label>
+    <input
+      matInput
+      type="text"
+      [formControlName]="controlNames.NAME"
+      [textContent]="'REGISTER.FORM.NAME.PLACEHOLDER' | translate"
+    />
     <mat-error *ngIf="nameCtrl?.invalid && (nameCtrl?.dirty || nameCtrl?.touched)">
-      <ng-container *ngIf="nameCtrl?.hasError('required')">Your name is <strong>required</strong></ng-container>
+      <div *ngIf="nameCtrl?.hasError('required')" [innerHTML]="'REGISTER.ERRORS.NAME_REQUIRED' | translate"></div>
     </mat-error>
-
     <mat-icon matSuffix>person</mat-icon>
   </mat-form-field>
 
   <!-- EMAIL FORM FIELD -->
-  <mat-form-field appearance="outline">
-    <mat-label>Email</mat-label>
-    <input matInput type="email" [formControlName]="controlNames.EMAIL" placeholder="john.doe@email.com" />
-
+  <mat-form-field appearance="outline" class="mb10">
+    <mat-label [textContent]="'REGISTER.FORM.EMAIL.NAME' | translate"></mat-label>
+    <input
+      matInput
+      type="email"
+      [formControlName]="controlNames.EMAIL"
+      [textContent]="'REGISTER.FORM.EMAIL.PLACEHOLDER' | translate"
+    />
     <mat-error *ngIf="emailCtrl?.invalid && (emailCtrl?.dirty || emailCtrl?.touched)">
-      <ng-container *ngIf="emailCtrl?.hasError('email') && !emailCtrl?.hasError('required')">
-        Please enter a valid email address
-      </ng-container>
-      <ng-container *ngIf="emailCtrl?.hasError('required')">Email is <strong>required</strong> </ng-container>
+      <div
+        *ngIf="emailCtrl?.hasError('email') && !emailCtrl?.hasError('required')"
+        [innerHTML]="'REGISTER.ERRORS.VALID_EMAIL' | translate"
+      ></div>
+      <div *ngIf="emailCtrl?.hasError('required')" [innerHTML]="'REGISTER.ERRORS.EMAIL_REQUIRED' | translate"></div>
     </mat-error>
 
     <mat-icon matSuffix>email</mat-icon>
@@ -46,38 +63,49 @@
   <br />
 
   <!-- PASSWORD FORM FIELD -->
-  <mat-form-field appearance="outline">
-    <mat-label>Password</mat-label>
+  <mat-form-field appearance="outline" class="mb10">
+    <mat-label [textContent]="'REGISTER.FORM.PASSWORD.NAME' | translate"></mat-label>
     <input matInput type="password" [formControlName]="controlNames.PASSWORD" (input)="onPasswordInput()" />
-
     <mat-error *ngIf="passwordCtrl?.invalid && (passwordCtrl?.dirty || passwordCtrl?.touched)">
-      <ng-container *ngIf="passwordCtrl?.hasError('required')">Password is <strong>required</strong></ng-container>
+      <div
+        *ngIf="passwordCtrl?.hasError('required')"
+        [innerHTML]="'REGISTER.ERRORS.PASSWORD_REQUIRED' | translate"
+      ></div>
     </mat-error>
-
     <mat-icon matSuffix>lock</mat-icon>
   </mat-form-field>
 
   <!-- PASSWORD CONFIRMATION FORM FIELD -->
-  <mat-form-field appearance="outline">
-    <mat-label>Password confirmation</mat-label>
+  <mat-form-field appearance="outline" class="mb10">
+    <mat-label [textContent]="'REGISTER.FORM.PASSWORD_CONFIRMATION.NAME' | translate"></mat-label>
     <input
       matInput
       type="password"
       [formControlName]="controlNames.PASSWORD_CONFIRMATION"
       (input)="onPasswordInput()"
     />
-
     <mat-error *ngIf="passwordConfirmCtrl?.invalid && (passwordConfirmCtrl?.dirty || passwordConfirmCtrl?.touched)">
-      <ng-container *ngIf="passwordConfirmCtrl?.hasError('required')"
-        >Password confirmation is <strong>required</strong></ng-container
-      >
-      <ng-container *ngIf="form?.hasError('passwordMismatch')">Password mismatch</ng-container>
+      <div
+        *ngIf="passwordConfirmCtrl?.hasError('required')"
+        [innerHTML]="'REGISTER.ERRORS.PASSWORD_CONFIRMATION_REQUIRED' | translate"
+      ></div>
+      <div
+        *ngIf="form?.hasError('passwordMismatch')"
+        [innerHTML]="'REGISTER.ERRORS.PASSWORD_MISMATCH' | translate"
+      ></div>
     </mat-error>
-
     <mat-icon matSuffix>lock</mat-icon>
   </mat-form-field>
 
-  <button mat-flat-button color="primary" type="submit" [disabled]="isLoading">Sign up</button>
+  <!-- FORM SUBMIT -->
+  <button
+    mat-flat-button
+    color="primary"
+    type="submit"
+    [disabled]="isLoading"
+    [textContent]="'REGISTER.FORM.SUBMIT' | translate"
+  ></button>
 
-  <p class="text-danger text-center mt30">{{ errorMessage }}</p>
+  <!-- FORM ERRORS -->
+  <p *ngIf="errorMessage" class="text-danger text-center mt30">{{ errorMessage | translate }}</p>
 </form>

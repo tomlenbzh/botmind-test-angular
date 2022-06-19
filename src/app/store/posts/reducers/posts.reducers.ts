@@ -16,6 +16,7 @@ import {
   REMOVE_LIKE_POST_ACTION,
   REMOVE_LIKE_POST_ERROR_ACTION,
   REMOVE_LIKE_POST_SUCCESS_ACTION,
+  RESET_POSTS_STATE_ACTION,
   UPDATE_POST_ACTION,
   UPDATE_POST_ERROR_ACTION,
   UPDATE_POST_SUCCESS_ACTION
@@ -63,11 +64,16 @@ export const postsReducer = createReducer(
   on(DELETE_POST_ACTION, (state: PostsState): PostsState => ({ ...state, isLoading: true })),
   on(DELETE_POST_SUCCESS_ACTION, (state: PostsState, { id }): PostsState => {
     const index = state.posts?.findIndex((p: IPost) => p.id === id);
-    return {
+    const newPosts = state.posts;
+    newPosts.splice(index, 1);
+
+    const newState = {
       ...state,
       isLoading: false,
-      posts: state.posts && index ? state.posts.splice(index, 1) : { ...state.posts }
+      posts: index ? newPosts : [...state.posts]
     };
+
+    return newState;
   }),
   on(DELETE_POST_ERROR_ACTION, (state: PostsState): PostsState => ({ ...state, isLoading: false })),
   on(LIKE_POST_ACTION, (state: PostsState): PostsState => ({ ...state })),
@@ -91,5 +97,6 @@ export const postsReducer = createReducer(
       )
     })
   ),
-  on(REMOVE_LIKE_POST_ERROR_ACTION, (state: PostsState): PostsState => ({ ...state }))
+  on(REMOVE_LIKE_POST_ERROR_ACTION, (state: PostsState): PostsState => ({ ...state })),
+  on(RESET_POSTS_STATE_ACTION, (): PostsState => initialState)
 );

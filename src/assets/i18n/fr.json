@@ -1,0 +1,116 @@
+{
+  "APP": {
+    "TITLE": "Botmind Test",
+    "LOGOUT": "Se déconnecter",
+    "CHANGE_LANG": "Changer de langue",
+    "BACK_TO_MAIN_FEED": "Retourner au fil d'actu"
+  },
+  "LOGIN": {
+    "TITLE": "Connectez-vous",
+    "REGISTER": "Vous n'avez pas de compte ? Créez-en un ",
+    "HERE": "ici",
+    "FORM": {
+      "EMAIL": {
+        "NAME": "Email",
+        "PLACEHOLDER": "john.doe@gmail.com"
+      },
+      "PASSWORD": {
+        "NAME": "Mot de passe"
+      },
+      "SUBMIT": "Se connecter"
+    },
+    "ERRORS": {
+      "VALID_EMAIL": "Veuillez entrer une adresse email valide",
+      "EMAIL_REQUIRED": "Votre email est <strong>requis</strong>",
+      "PASSWORD_REQUIRED": "Votre mot de passe est <strong>requis</strong>"
+    }
+  },
+  "REGISTER": {
+    "TITLE": "Créez votre compte",
+    "LOGIN": "Vous avez déjà un compte ? Connectez-vous ",
+    "HERE": "ici",
+    "FORM": {
+      "USERNAME": {
+        "NAME": "Pseudo",
+        "PLACEHOLDER": "lEnOmQUEvOusvoUlez"
+      },
+      "NAME": {
+        "NAME": "Nom",
+        "PLACEHOLDER": "John Doe"
+      },
+      "EMAIL": {
+        "NAME": "Email",
+        "PLACEHOLDER": "john.doe@gmail.com"
+      },
+      "PASSWORD": {
+        "NAME": "Mot de passe"
+      },
+      "PASSWORD_CONFIRMATION": {
+        "NAME": "Confirmation du mot de passe"
+      },
+      "SUBMIT": "Continuer"
+    },
+    "ERRORS": {
+      "VALID_EMAIL": "Veuillez entrer une adresse email valide",
+      "EMAIL_REQUIRED": "Votre email est <strong>requis</strong>",
+      "PASSWORD_REQUIRED": "Votre mot de passe est <strong>requis</strong>",
+      "PASSWORD_CONFIRMATION_REQUIRED": "Veuillez <strong>confirmer</strong> votre mot de passe",
+      "USERNAME_REQUIRED": "Votre pseudo est <strong>requis</strong>",
+      "NAME_REQUIRED": "Votre nom est <strong>requis</strong>",
+      "PASSWORD_MISMATCH": "Les mots de passe doivent être identiques"
+    }
+  },
+  "POSTS": {
+    "TITLE": "Écrire un nouveau post",
+    "NO_POSTS": "Aucun post n'a été publié pour le moment",
+    "FORM": {
+      "TITLE": "Titre du post",
+      "TITLE_PLACEHOLDER": "Mon super post",
+      "BODY": "Contenu du post",
+      "BODY_PLACEHOLDER": "lorem ipsum dolor sit amet...",
+      "FIELD_MAX_LENGTH": "{{ count }} / {{ max }}",
+      "PUBLISH": "Publier",
+      "ERRORS": {
+        "TITLE_LENGTH": "Le titre est limité à <strong>{{ count }}</strong> caractères",
+        "TITLE_REQUIRED": "Le titre est <strong>requis</strong>",
+        "BODY_LENGTH": "Le contenu est limité à <strong>{{ count }}</strong> caractères",
+        "BODY_REQUIRED": "Le contenu est <strong>requis</strong>"
+      }
+    },
+    "ACTIONS": {
+      "LIKE": "Liker ce post",
+      "REMOVE_LIKE": "Retirer votre like",
+      "EDIT": "Editer votre post",
+      "VALIDATE": "Valider",
+      "DELETE": "Supprimer votre post",
+      "CANCEL": "Annuler"
+    },
+    "DELETE_MODAL": {
+      "TITLE": "Supprimer ce post ?",
+      "BODY": "Voulez-vous vraiment supprimer votre post ? Cette action est irréversible et toutes les données associées seront également supprimées.",
+      "YES": "Oui, supprimer ce post",
+      "NO": "Annuler"
+    }
+  },
+  "PROFILE": {
+    "GO_TO_MY_FEED": "Voir mon feed",
+    "GO_TO_ALL_POSTS": "Voir le fil d'actu",
+    "DELETE_PROFILE": "Supprimer mon compte",
+    "DELETE_MODAL": {
+      "TITLE": "Vous nous quittez ?",
+      "BODY": "Si vous cliquez sur \"Supprimer mon compte\", votre compte sera supprimé de manière permanente, ainsi que tous vos posts données associées.",
+      "YES": "Supprimer mon compte",
+      "NO": "Annuler"
+    }
+  },
+  "CREDENTIALS_ALREADY_EXIST": "Le même email ou le même pseudo est déjà pris",
+  "USER_NOT_FOUND": "L'utilisateur n'a pas été trouvé",
+  "USER_CANNOT_BE_DELETED": "L'utilisateur n'a pas pu être supprimé",
+  "BAD_CREDENTIALS": "Mauvais identifiants",
+  "ACCOUNT_NOT_FOUND": "Aucun compte trouvé pour cet email",
+  "POST_COULD_NOT_BE_CREATED": "Votre post n'a pas pu être crée",
+  "POST_NOT_FOUND": "Le post n'a pas été trouvé",
+  "POST_CANNOT_BE_DELETED": "Le post n'a pas pu être supprimé",
+  "LIKE_COULD_NOT_BE_CREATED": "Le like n'a pas pu être validé",
+  "LIKE_CANNOT_BE_DELETED": "Le like n'a pas pu être supprimé"
+}

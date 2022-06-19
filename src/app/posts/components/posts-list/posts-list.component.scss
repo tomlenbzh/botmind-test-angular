@@ -1,6 +1,17 @@
 $toolbar-height: 64px;
 
 .posts-list {
-  height: calc(100vh - #{$toolbar-height});
+  height: 100%;
   overflow: auto;
+}
+
+.no-posts {
+  text-align: center;
+  margin: 50px auto;
+  text-decoration: underline;
+  text-underline-offset: 10px;
+  font-weight: bold;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }

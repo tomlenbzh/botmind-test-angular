@@ -17,7 +17,10 @@ import {
   LIKE_POST_ERROR_ACTION,
   REMOVE_LIKE_POST_ACTION,
   REMOVE_LIKE_POST_SUCCESS_ACTION,
-  REMOVE_LIKE_POST_ERROR_ACTION
+  REMOVE_LIKE_POST_ERROR_ACTION,
+  DELETE_POST_ACTION,
+  DELETE_POST_SUCCESS_ACTION,
+  DELETE_POST_ERROR_ACTION
 } from '../actions/posts.actions';
 
 @Injectable()
@@ -47,6 +50,20 @@ export class PostsEffects {
             return CREATE_POST_SUCCESS_ACTION({ post });
           }),
           catchError((error) => of(CREATE_POST_ERROR_ACTION({ error })))
+        );
+      })
+    );
+  });
+
+  deletePost$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DELETE_POST_ACTION),
+      exhaustMap((action) => {
+        return this.postsService.deletePost(action.id).pipe(
+          map(() => {
+            return DELETE_POST_SUCCESS_ACTION({ id: action.id });
+          }),
+          catchError((error) => of(DELETE_POST_ERROR_ACTION({ error })))
         );
       })
     );

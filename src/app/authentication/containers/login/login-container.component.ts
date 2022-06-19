@@ -18,6 +18,7 @@ export class LoginContainerComponent implements OnInit {
   constructor(private authHelper: AuthenticationHelper) {}
 
   ngOnInit(): void {
+    this.authHelper.resetAuthState();
     this.isLoading = this.authHelper.isLoading();
     this.errorMessage = this.authHelper.errorMessage();
   }
