@@ -10,7 +10,8 @@ import {
   FETCH_POSTS_ACTION,
   LIKE_POST_ACTION,
   REMOVE_LIKE_POST_ACTION,
-  RESET_POSTS_STATE_ACTION
+  RESET_POSTS_STATE_ACTION,
+  UPDATE_POST_ACTION
 } from '../actions/posts.actions';
 import { selectPosts, selectPostsLoading, selectMeta } from '../selectors/posts.selectors';
 
@@ -38,6 +39,11 @@ export class PostsHelper {
 
   newPost(post: IPost): void {
     this.store.dispatch(CREATE_POST_ACTION({ post }));
+  }
+
+  editPost(post: IPost): void {
+    const postId = post.id;
+    postId && this.store.dispatch(UPDATE_POST_ACTION({ id: postId, post }));
   }
 
   likePost(like: ILike): void {

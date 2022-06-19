@@ -17,6 +17,7 @@ import { ILike, ILikeData, IListMeta, IPost } from '../../utils/interfaces';
     (like)="likePost($event)"
     (removeLike)="removeLikePost($event)"
     (delete)="deletePost($event)"
+    (edit)="editPost($event)"
   ></app-posts-list>`
 })
 export class PostsListContainerComponent implements OnInit, OnDestroy {
@@ -57,6 +58,10 @@ export class PostsListContainerComponent implements OnInit, OnDestroy {
 
   deletePost(id: number): void {
     this.postsHelper.deletePost(id);
+  }
+
+  editPost(post: IPost): void {
+    this.postsHelper.editPost(post);
   }
 
   fetchMore(meta: IListMeta): void {

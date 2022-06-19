@@ -16,11 +16,13 @@ export class PostComponent implements OnChanges {
   @Output() like: EventEmitter<ILike> = new EventEmitter<ILike>();
   @Output() removelike: EventEmitter<ILikeData> = new EventEmitter<ILikeData>();
   @Output() delete: EventEmitter<number> = new EventEmitter<number>();
+  @Output() edit: EventEmitter<IPost> = new EventEmitter<IPost>();
 
   @ViewChild('deletePostDialog') deletePostDialog!: any;
 
   dialogRef!: MatDialogRef<any>;
   isAuthor = false;
+  isEditing = false;
   likes = 0;
   likedByCurrentUser = false;
   currentUserLike!: ILike;
@@ -45,6 +47,10 @@ export class PostComponent implements OnChanges {
     !this.likedByCurrentUser ? this.likePost() : this.removeLikePost();
   }
 
+  toggleEdit() {
+    this.isEditing = !this.isEditing;
+  }
+
   gotToUser(): void {
     if (this.currentUser) {
       this.router.navigateByUrl(`/app/users/${this.currentUser.id}`);
@@ -56,6 +62,11 @@ export class PostComponent implements OnChanges {
       this.delete.emit(this.post.id);
       this.closeDeleteModal();
     }
+  }
+
+  editPost(post: IPost): void {
+    this.toggleEdit();
+    this.edit.emit(post);
   }
 
   openDeleteModal(): void {

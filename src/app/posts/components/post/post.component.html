@@ -20,7 +20,13 @@
         <mat-icon>favorite</mat-icon>
       </button>
 
-      <button mat-mini-fab *ngIf="isAuthor" color="basic" [matTooltip]="'POSTS.ACTIONS.EDIT' | translate">
+      <button
+        mat-mini-fab
+        *ngIf="isAuthor"
+        color="basic"
+        [matTooltip]="'POSTS.ACTIONS.EDIT' | translate"
+        (click)="toggleEdit()"
+      >
         <mat-icon>edit</mat-icon>
       </button>
 
@@ -36,8 +42,19 @@
     </div>
   </div>
 
-  <h2 class="title nomargin mt10" [textContent]="post?.title"></h2>
-  <div class="post-body" [textContent]="post?.body"></div>
+  <ng-container *ngIf="!isEditing; else editTemplate">
+    <h2 class="title nomargin mt10" [textContent]="post?.title"></h2>
+    <div class="post-body" [textContent]="post?.body"></div>
+  </ng-container>
+
+  <ng-template #editTemplate>
+    <app-post-form
+      [currentUser]="currentUser"
+      [currentPost]="post"
+      [editMode]="true"
+      (postEdited)="editPost($event)"
+    ></app-post-form>
+  </ng-template>
 </mat-card>
 
 <ng-template #deletePostDialog>

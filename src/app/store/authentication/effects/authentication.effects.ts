@@ -6,6 +6,7 @@ import { catchError, exhaustMap, map } from 'rxjs/operators';
 import { IUser, LoginInfo } from 'src/app/authentication/utils/interfaces';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { SELECTED_LANGUAGE } from 'src/app/shared/constants/constants';
+import { AuthenticationHelper } from '../helpers/authentication.helper';
 import {
   LOGIN_ACTION,
   LOGIN_ERROR_ACTION,
@@ -15,7 +16,6 @@ import {
   SIGNUP_ERROR_ACTION,
   SIGNUP_SUCCESS_ACTION
 } from '../actions/authentications.actions';
-import { AuthenticationHelper } from '../helpers/authentication.helper';
 
 @Injectable()
 export class AuthEffects {
@@ -31,9 +31,7 @@ export class AuthEffects {
       ofType(LOGIN_ACTION),
       exhaustMap((action) =>
         this.authService.login(action.credentials).pipe(
-          map((loginInfo: LoginInfo) => {
-            return LOGIN_SUCCESS_ACTION(loginInfo);
-          }),
+          map((loginInfo: LoginInfo) => LOGIN_SUCCESS_ACTION(loginInfo)),
           catchError((error) => of(LOGIN_ERROR_ACTION({ error })))
         )
       )

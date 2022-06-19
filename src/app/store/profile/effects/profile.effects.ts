@@ -27,9 +27,7 @@ export class ProfileEffects {
       ofType(FETCH_PROFILE_ACTION),
       exhaustMap((action) =>
         this.profileService.fetchProfile(action.id).pipe(
-          map((user: IUser) => {
-            return FETCH_PROFILE_SUCCESS_ACTION({ user });
-          }),
+          map((user: IUser) => FETCH_PROFILE_SUCCESS_ACTION({ user })),
           catchError((error) => of(FETCH_PROFILE_ERROR_ERROR({ error })))
         )
       )
@@ -41,9 +39,7 @@ export class ProfileEffects {
       ofType(UPDATE_PROFILE_ACTION),
       exhaustMap((action) =>
         this.profileService.updateProfile(action.id, action.user).pipe(
-          map((user: IUser) => {
-            return UPDATE_PROFILE_SUCCESS_ACTION({ user });
-          }),
+          map((user: IUser) => UPDATE_PROFILE_SUCCESS_ACTION({ user })),
           catchError((error) => of(UPDATE_PROFILE_ERROR_ACTION({ error })))
         )
       )
