@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { IUser } from 'src/app/authentication/utils/interfaces';
 import { PostFormControlsNames } from '../../constants/posts.constants';
@@ -9,9 +9,13 @@ import { IPost } from '../../utils/interfaces';
   templateUrl: './post-form.component.html',
   styleUrls: ['./post-form.component.scss']
 })
-export class PostFormComponent implements OnInit {
+export class PostFormComponent implements OnInit, OnChanges {
   @Input() currentUser!: IUser | null;
+  @Input() currentPost!: IPost | null;
+  @Input() editMode = false;
+
   @Output() postSubmitted: EventEmitter<IPost> = new EventEmitter<IPost>();
+  @Output() postEdited: EventEmitter<IPost> = new EventEmitter<IPost>();
 
   controlNames = PostFormControlsNames;
   form!: FormGroup;
@@ -29,15 +33,27 @@ export class PostFormComponent implements OnInit {
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    this.createForm();
+    !this.editMode && this.createForm();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.hasOwnProperty('currentPost') && this.currentPost) {
+      this.createForm();
+      this.setFormWithCurrentPost();
+    }
   }
 
   submitForm(formDirective: FormGroupDirective): void {
     if (this.form.valid) {
-      const post: IPost = { ...this.form.getRawValue(), user: this.currentUser };
-      this.postSubmitted.emit(post);
-      this.form.reset();
-      formDirective.resetForm();
+      if (this.editMode) {
+        const post: IPost = { ...this.currentPost, ...this.form.getRawValue() };
+        this.postEdited.emit(post);
+      } else {
+        const post: IPost = { ...this.form.getRawValue(), user: this.currentUser };
+        this.postSubmitted.emit(post);
+        this.form.reset();
+        formDirective.resetForm();
+      }
     }
   }
 
@@ -46,5 +62,15 @@ export class PostFormComponent implements OnInit {
       [this.controlNames.TITLE]: new FormControl('', [Validators.required, Validators.maxLength(50)]),
       [this.controlNames.BODY]: new FormControl('', [Validators.required, Validators.maxLength(500)])
     });
+  }
+
+  private setFormWithCurrentPost(): void {
+    if (this.currentUser && this.currentPost && this.editMode && this.form) {
+      console.log('GET IN ?');
+      this.form.patchValue({
+        [this.controlNames.TITLE]: this.currentPost?.title,
+        [this.controlNames.BODY]: this.currentPost?.body
+      });
+    }
   }
 }

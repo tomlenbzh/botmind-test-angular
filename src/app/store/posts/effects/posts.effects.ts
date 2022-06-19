@@ -20,7 +20,9 @@ import {
   REMOVE_LIKE_POST_ERROR_ACTION,
   DELETE_POST_ACTION,
   DELETE_POST_SUCCESS_ACTION,
-  DELETE_POST_ERROR_ACTION
+  DELETE_POST_ERROR_ACTION,
+  UPDATE_POST_ACTION,
+  UPDATE_POST_SUCCESS_ACTION
 } from '../actions/posts.actions';
 
 @Injectable()
@@ -32,9 +34,7 @@ export class PostsEffects {
       ofType(FETCH_POSTS_ACTION),
       exhaustMap((action) => {
         return this.postsService.fetchPostsList(action.limit, action.page, action.userId).pipe(
-          map(({ items, meta }) => {
-            return FETCH_POSTS_SUCCESS_ACTION({ posts: items, meta });
-          }),
+          map(({ items, meta }) => FETCH_POSTS_SUCCESS_ACTION({ posts: items, meta })),
           catchError((error) => of(FETCH_POSTS_ERROR_ERROR({ error })))
         );
       })
@@ -46,9 +46,19 @@ export class PostsEffects {
       ofType(CREATE_POST_ACTION),
       exhaustMap((action) => {
         return this.postsService.createPost(action.post).pipe(
-          map((post: IPost) => {
-            return CREATE_POST_SUCCESS_ACTION({ post });
-          }),
+          map((post: IPost) => CREATE_POST_SUCCESS_ACTION({ post })),
+          catchError((error) => of(CREATE_POST_ERROR_ACTION({ error })))
+        );
+      })
+    );
+  });
+
+  editPost$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UPDATE_POST_ACTION),
+      exhaustMap((action) => {
+        return this.postsService.editPost(action.id, action.post).pipe(
+          map((post: IPost) => UPDATE_POST_SUCCESS_ACTION({ post })),
           catchError((error) => of(CREATE_POST_ERROR_ACTION({ error })))
         );
       })
@@ -60,9 +70,7 @@ export class PostsEffects {
       ofType(DELETE_POST_ACTION),
       exhaustMap((action) => {
         return this.postsService.deletePost(action.id).pipe(
-          map(() => {
-            return DELETE_POST_SUCCESS_ACTION({ id: action.id });
-          }),
+          map(() => DELETE_POST_SUCCESS_ACTION({ id: action.id })),
           catchError((error) => of(DELETE_POST_ERROR_ACTION({ error })))
         );
       })

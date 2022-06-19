@@ -1,5 +1,11 @@
-<form [formGroup]="form" #formDirective="ngForm" (ngSubmit)="submitForm(formDirective)" class="post-form">
-  <h2 [textContent]="'POSTS.TITLE' | translate"></h2>
+<form
+  [formGroup]="form"
+  #formDirective="ngForm"
+  (ngSubmit)="submitForm(formDirective)"
+  class="post-form"
+  [ngClass]="{ 'mt20 mb0': editMode }"
+>
+  <h2 [textContent]="(!editMode ? 'POSTS.TITLE' : 'EDIT POST') | translate"></h2>
 
   <!-- +++++ TITLE FIELD +++++ -->
   <mat-form-field appearance="outline">

@@ -23,6 +23,10 @@ export class PostsService {
     return this.httpClient.post<IPost>(`${this.baseUrl}/posts`, post);
   }
 
+  editPost(id: number, post: IPost): Observable<IPost> {
+    return this.httpClient.put<IPost>(`${this.baseUrl}/posts/${id}`, post);
+  }
+
   deletePost(id: number): Observable<any> {
     return this.httpClient.delete<any>(`${this.baseUrl}/posts/${id}`);
   }
