@@ -15,13 +15,7 @@
       </button>
     </mat-toolbar>
 
-    <main
-      class="main-content"
-      infiniteScroll
-      [infiniteScrollDistance]="2"
-      [scrollWindow]="false"
-      (scrolled)="onScrollToBottom()"
-    >
+    <main class="main-content">
       <router-outlet></router-outlet>
     </main>
   </mat-drawer-content>

@@ -9,7 +9,7 @@ import { AuthenticationHelper } from 'src/app/store/authentication/helpers/authe
 export class AuthenticationGuard implements CanActivate {
   authRoutes = ['/auth/login', '/auth/signup'];
 
-  constructor(private authHelper: AuthenticationHelper, public router: Router) {}
+  constructor(private authHelper: AuthenticationHelper, private router: Router) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (this.authRoutes.includes(state.url) || state.url === '') {

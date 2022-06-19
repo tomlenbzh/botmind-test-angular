@@ -5,9 +5,11 @@ import { components } from './components';
 import { containers } from './containers';
 import { SharedModule } from '../shared/shared.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [...components, ...containers],
-  imports: [CommonModule, PostsRoutingModule, SharedModule, InfiniteScrollModule]
+  imports: [CommonModule, PostsRoutingModule, SharedModule, InfiniteScrollModule, FormsModule, ReactiveFormsModule],
+  exports: [...components, ...containers]
 })
 export class PostsModule {}

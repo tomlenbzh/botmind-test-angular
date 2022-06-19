@@ -1,0 +1,21 @@
+.post-form {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  background: #ededed;
+  border-radius: 4px;
+  margin-bottom: 50px;
+
+  .post-title {
+  }
+
+  .post-body {
+    min-height: 100px;
+  }
+
+  .post-form-footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
