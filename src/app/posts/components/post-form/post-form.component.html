@@ -1,40 +1,54 @@
 <form [formGroup]="form" #formDirective="ngForm" (ngSubmit)="submitForm(formDirective)" class="post-form">
-  <h2>Add a new post</h2>
+  <h2 [textContent]="'POSTS.TITLE' | translate"></h2>
 
+  <!-- +++++ TITLE FIELD +++++ -->
   <mat-form-field appearance="outline">
-    <mat-label>Post title</mat-label>
-    <input matInput placeholder="Post title" [formControlName]="controlNames.TITLE" />
-    <mat-hint [align]="'end'">{{ titleCtrl?.value?.length }} / 50</mat-hint>
-
+    <mat-label [textContent]="'POSTS.FORM.TITLE' | translate"></mat-label>
+    <input matInput [placeholder]="'POSTS.FORM.TITLE_PLACEHOLDER' | translate" [formControlName]="controlNames.TITLE" />
+    <mat-hint
+      [align]="'end'"
+      [textContent]="
+        'POSTS.FORM.FIELD_MAX_LENGTH' | translate: { count: titleCtrl?.value?.length || 0, max: titleMaxLength }
+      "
+    ></mat-hint>
     <mat-error *ngIf="titleCtrl?.invalid && (titleCtrl?.dirty || titleCtrl?.touched)">
-      <ng-container *ngIf="titleCtrl?.hasError('maxlength') && !titleCtrl?.hasError('required')">
-        max length 50
-      </ng-container>
-      <ng-container *ngIf="titleCtrl?.hasError('required')">Title is <strong>required</strong> </ng-container>
+      <div
+        *ngIf="titleCtrl?.hasError('maxlength') && !titleCtrl?.hasError('required')"
+        [innerHTML]="'POSTS.FORM.ERRORS.TITLE_LENGTH' | translate: { count: titleMaxLength }"
+      ></div>
+      <div *ngIf="titleCtrl?.hasError('required')" [innerHTML]="'POSTS.FORM.ERRORS.TITLE_REQUIRED' | translate"></div>
     </mat-error>
   </mat-form-field>
 
+  <!-- +++++ BODY FIELD +++++ -->
   <mat-form-field class="mt20" appearance="outline">
-    <mat-label>Post body</mat-label>
+    <mat-label [textContent]="'POSTS.FORM.BODY' | translate"></mat-label>
     <textarea
       matInput
-      placeholder="Ex. It makes me feel..."
+      [placeholder]="'POSTS.FORM.BODY_PLACEHOLDER' | translate"
       class="post-body"
       [formControlName]="controlNames.BODY"
     ></textarea>
-    <mat-hint [align]="'end'">{{ bodyCtrl?.value?.length }} / 500</mat-hint>
+    <mat-hint
+      [align]="'end'"
+      [textContent]="
+        'POSTS.FORM.FIELD_MAX_LENGTH' | translate: { count: bodyCtrl?.value?.length || 0, max: bodyMaxLength }
+      "
+    ></mat-hint>
 
     <mat-error *ngIf="bodyCtrl?.invalid && (bodyCtrl?.dirty || bodyCtrl?.touched)">
-      <ng-container *ngIf="bodyCtrl?.hasError('maxlength') && !bodyCtrl?.hasError('required')">
-        max length 300
-      </ng-container>
-      <ng-container *ngIf="bodyCtrl?.hasError('required')">Body is <strong>required</strong> </ng-container>
+      <div
+        *ngIf="bodyCtrl?.hasError('maxlength') && !bodyCtrl?.hasError('required')"
+        [innerHTML]="'POSTS.FORM.ERRORS.BODY_LENGTH' | translate: { count: bodyMaxLength }"
+      ></div>
+      <div *ngIf="bodyCtrl?.hasError('required')" [innerHTML]="'POSTS.FORM.ERRORS.BODY_REQUIRED' | translate"></div>
     </mat-error>
   </mat-form-field>
 
+  <!-- +++++ PUBLISH POST +++++ -->
   <div class="post-form-footer mt20">
     <button mat-flat-button color="primary" type="submit">
-      Submit
+      <span [textContent]="'POSTS.FORM.PUBLISH' | translate"></span>
       <mat-icon matSuffix class="ml10">send</mat-icon>
     </button>
   </div>

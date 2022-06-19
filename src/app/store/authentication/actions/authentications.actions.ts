@@ -15,3 +15,5 @@ export const LOGOUT_BACK_IN_ACTION = createAction(AuthActionTypes.LOG_BACK_IN);
 export const SIGNUP_ACTION = createAction(AuthActionTypes.SIGNUP, props<{ credentials: IUser }>());
 export const SIGNUP_SUCCESS_ACTION = createAction(AuthActionTypes.SIGNUP_SUCCESS, props<{ credentials: IUser }>());
 export const SIGNUP_ERROR_ACTION = createAction(AuthActionTypes.SIGNUP_ERROR, props<{ error: HttpErrorResponse }>());
+
+export const RESET_AUTH_STATE_ACTION = createAction(AuthActionTypes.RESET_AUTH_STATE);

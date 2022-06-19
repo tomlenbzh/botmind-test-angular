@@ -15,5 +15,14 @@
     .userName {
       font-size: 30px;
     }
+
+    .actions {
+      margin-top: 30px;
+      gap: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
   }
 }

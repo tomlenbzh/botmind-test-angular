@@ -7,11 +7,9 @@
   border-radius: 4px;
   margin-bottom: 50px;
 
-  .post-title {
-  }
-
   .post-body {
-    min-height: 100px;
+    max-height: 100px;
+    overflow: hidden;
   }
 
   .post-form-footer {

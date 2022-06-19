@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { SignupFormControlsNames } from '../../utils/constants';
 import { IUser } from '../../utils/interfaces';
 import { passwordMatchValidator } from '../../utils/validators/check-passwords';
@@ -40,7 +41,7 @@ export class SignupComponent implements OnInit {
     return this.form.get(this.controlNames.NAME);
   }
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private translate: TranslateService) {}
 
   ngOnInit(): void {
     this.createForm();
@@ -49,6 +50,7 @@ export class SignupComponent implements OnInit {
   submitForm(): void {
     if (this.form.valid) {
       const credentials: IUser = this.form.getRawValue();
+      credentials.lang = this.translate.currentLang;
       this.signUpClicked.emit(credentials);
     }
   }

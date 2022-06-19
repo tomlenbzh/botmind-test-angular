@@ -17,6 +17,7 @@ export class PostsListComponent {
   @Output() scrolled: EventEmitter<IListMeta> = new EventEmitter<IListMeta>();
   @Output() like: EventEmitter<ILike> = new EventEmitter<ILike>();
   @Output() removeLike: EventEmitter<ILikeData> = new EventEmitter<ILikeData>();
+  @Output() delete: EventEmitter<number> = new EventEmitter<number>();
 
   onScroll(): void {
     if (this.meta) this.scrolled.emit(this.meta);
@@ -32,5 +33,9 @@ export class PostsListComponent {
 
   removeLikePost(data: ILikeData): void {
     this.removeLike.emit(data);
+  }
+
+  deletePost(id: number): void {
+    this.delete.emit(id);
   }
 }

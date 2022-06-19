@@ -16,4 +16,10 @@ export class ProfileContainerComponent implements OnInit {
   ngOnInit(): void {
     this.profile = this.profileHelper.profile();
   }
+
+  deleteAccount(profile: IUser): void {
+    if (profile.id) {
+      this.profileHelper.deleteProfile(profile.id);
+    }
+  }
 }

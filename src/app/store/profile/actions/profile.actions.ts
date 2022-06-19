@@ -6,7 +6,7 @@ import { ProfileActionTypes } from './profile.actions.types';
 export const FETCH_PROFILE_ACTION = createAction(ProfileActionTypes.FETCH_PROFILE, props<{ id: number }>());
 export const FETCH_PROFILE_SUCCESS_ACTION = createAction(
   ProfileActionTypes.FETCH_PROFILE_SUCCESS,
-  props<{ profile: IUser }>()
+  props<{ user: IUser }>()
 );
 export const FETCH_PROFILE_ERROR_ERROR = createAction(
   ProfileActionTypes.FETCH_PROFILE_ERROR,
@@ -14,11 +14,11 @@ export const FETCH_PROFILE_ERROR_ERROR = createAction(
 );
 export const UPDATE_PROFILE_ACTION = createAction(
   ProfileActionTypes.UPDATE_PROFILE,
-  props<{ id: number; profile: IUser }>()
+  props<{ id: number; user: IUser }>()
 );
 export const UPDATE_PROFILE_SUCCESS_ACTION = createAction(
   ProfileActionTypes.UPDATE_PROFILE_SUCCESS,
-  props<{ profile: IUser }>()
+  props<{ user: IUser }>()
 );
 export const UPDATE_PROFILE_ERROR_ACTION = createAction(
   ProfileActionTypes.UPDATE_PROFILE_ERROR,

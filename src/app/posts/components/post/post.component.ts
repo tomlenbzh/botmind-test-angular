@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { IUser } from 'src/app/authentication/utils/interfaces';
 import { ILike, ILikeData, IPost } from '../../utils/interfaces';
 
@@ -13,13 +15,18 @@ export class PostComponent implements OnChanges {
 
   @Output() like: EventEmitter<ILike> = new EventEmitter<ILike>();
   @Output() removelike: EventEmitter<ILikeData> = new EventEmitter<ILikeData>();
+  @Output() delete: EventEmitter<number> = new EventEmitter<number>();
 
+  @ViewChild('deletePostDialog') deletePostDialog!: any;
+
+  dialogRef!: MatDialogRef<any>;
   isAuthor = false;
   likes = 0;
   likedByCurrentUser = false;
   currentUserLike!: ILike;
+  placeholder = 'https://www.in.gov/bmv/images/profile-placeholder.png';
 
-  constructor() {}
+  constructor(private router: Router, private dialog: MatDialog) {}
 
   ngOnChanges(): void {
     if (this.post && this.currentUser) {
@@ -38,14 +45,35 @@ export class PostComponent implements OnChanges {
     !this.likedByCurrentUser ? this.likePost() : this.removeLikePost();
   }
 
+  gotToUser(): void {
+    if (this.currentUser) {
+      this.router.navigateByUrl(`/app/users/${this.currentUser.id}`);
+    }
+  }
+
+  deletePost(): void {
+    if (this.post?.id) {
+      this.delete.emit(this.post.id);
+      this.closeDeleteModal();
+    }
+  }
+
+  openDeleteModal(): void {
+    this.dialogRef = this.dialog.open(this.deletePostDialog);
+  }
+
+  closeDeleteModal(): void {
+    if (this.dialog) {
+      this.dialogRef.close();
+    }
+  }
+
   private likePost(): void {
     if (this.currentUser?.id && this.post) {
       const like: ILike = {
         user: { id: this.currentUser.id as number },
         post: { id: this.post.id }
       };
-      // const data: ILikeData = { like, currentUser: this.currentUser };
-
       this.like.emit(like);
     }
   }

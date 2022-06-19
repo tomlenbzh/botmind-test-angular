@@ -30,6 +30,8 @@
     "@ngrx/router-store": "^13.2.0",
     "@ngrx/store": "^13.2.0",
     "@ngrx/store-devtools": "^13.2.0",
+    "@ngx-translate/core": "^14.0.0",
+    "@ngx-translate/http-loader": "^7.0.0",
     "@popperjs/core": "^2.10.2",
     "autoprefixer": "10.4.5",
     "bootstrap": "^5.1.3",

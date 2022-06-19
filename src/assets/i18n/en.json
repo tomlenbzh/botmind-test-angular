@@ -1,0 +1,116 @@
+{
+  "APP": {
+    "TITLE": "Botmind Test",
+    "LOGOUT": "Logout",
+    "CHANGE_LANG": "Change language",
+    "BACK_TO_MAIN_FEED": "Back to main feed"
+  },
+  "LOGIN": {
+    "TITLE": "Log into the app",
+    "REGISTER": "No account ? Create one ",
+    "HERE": "here",
+    "FORM": {
+      "EMAIL": {
+        "NAME": "Email",
+        "PLACEHOLDER": "john.doe@gmail.com"
+      },
+      "PASSWORD": {
+        "NAME": "Password"
+      },
+      "SUBMIT": "Log in"
+    },
+    "ERRORS": {
+      "VALID_EMAIL": "Please enter a valid email address",
+      "EMAIL_REQUIRED": "Email is <strong>required</strong>",
+      "PASSWORD_REQUIRED": "Password is <strong>required</strong>"
+    }
+  },
+  "REGISTER": {
+    "TITLE": "Create an account",
+    "LOGIN": "Already have an account ? Log in ",
+    "HERE": "here",
+    "FORM": {
+      "USERNAME": {
+        "NAME": "Username",
+        "PLACEHOLDER": "whATeVErNAMEYoUlIkE"
+      },
+      "NAME": {
+        "NAME": "Name",
+        "PLACEHOLDER": "John Doe"
+      },
+      "EMAIL": {
+        "NAME": "Email",
+        "PLACEHOLDER": "john.doe@gmail.com"
+      },
+      "PASSWORD": {
+        "NAME": "Password"
+      },
+      "PASSWORD_CONFIRMATION": {
+        "NAME": "Password confirmation"
+      },
+      "SUBMIT": "Next"
+    },
+    "ERRORS": {
+      "VALID_EMAIL": "Please enter a valid email address",
+      "EMAIL_REQUIRED": "Email is <strong>required</strong>",
+      "PASSWORD_REQUIRED": "Password is <strong>required</strong>",
+      "PASSWORD_CONFIRMATION_REQUIRED": "Please <strong>confirm</strong> your password",
+      "USERNAME_REQUIRED": "Username is <strong>required</strong>",
+      "NAME_REQUIRED": "Name is <strong>required</strong>",
+      "PASSWORD_MISMATCH": "Password mismatch"
+    }
+  },
+  "POSTS": {
+    "TITLE": "Write a new post",
+    "NO_POSTS": "No posts have been published yet",
+    "FORM": {
+      "TITLE": "Post title",
+      "TITLE_PLACEHOLDER": "My awesome post",
+      "BODY": "Post body",
+      "BODY_PLACEHOLDER": "lorem ipsum dolor sit amet...",
+      "FIELD_MAX_LENGTH": "{{ count }} / {{ max }}",
+      "PUBLISH": "Publish",
+      "ERRORS": {
+        "TITLE_LENGTH": "Title's length is limited to <strong>{{ count }}</strong> characters",
+        "TITLE_REQUIRED": "Post title is <strong>required</strong>",
+        "BODY_LENGTH": "Body's length is limited to <strong>{{ count }}</strong> characters",
+        "BODY_REQUIRED": "Post body is <strong>required</strong>"
+      }
+    },
+    "ACTIONS": {
+      "LIKE": "Like this post",
+      "REMOVE_LIKE": "Remove you like",
+      "EDIT": "Edit your post",
+      "VALIDATE": "Validate",
+      "DELETE": "Delete you post",
+      "CANCEL": "Cancel"
+    },
+    "DELETE_MODAL": {
+      "TITLE": "Delete this post ?",
+      "BODY": "Do you really want to delete this post ? This action cannot be undoneand all associated data will be deleted as well.",
+      "YES": "Oui, supprimer ce post",
+      "NO": "Annuler"
+    }
+  },
+  "PROFILE": {
+    "GO_TO_MY_FEED": "Go to my feed",
+    "GO_TO_ALL_POSTS": "See all posts",
+    "DELETE_PROFILE": "Delete my account",
+    "DELETE_MODAL": {
+      "TITLE": "Leaving us ?",
+      "BODY": "If you click on \"Delete my account\", your account will be permanently deleted, and so will all the related information.",
+      "YES": "Delete my account",
+      "NO": "Cancel"
+    }
+  },
+  "CREDENTIALS_ALREADY_EXIST": "A user with the same email or username already exist",
+  "USER_NOT_FOUND": "User not found",
+  "USER_CANNOT_BE_DELETED": "User could not be delete",
+  "BAD_CREDENTIALS": "Bad credential",
+  "ACCOUNT_NOT_FOUND": "No acccount was found for this email",
+  "POST_COULD_NOT_BE_CREATED": "Your post could not be create",
+  "POST_NOT_FOUND": "Post not found",
+  "POST_CANNOT_BE_DELETED": "Post could not be delete",
+  "LIKE_COULD_NOT_BE_CREATED": "Like could not be inserted",
+  "LIKE_CANNOT_BE_DELETED": "Like could not be delete"
+}

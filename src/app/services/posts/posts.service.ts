@@ -23,6 +23,10 @@ export class PostsService {
     return this.httpClient.post<IPost>(`${this.baseUrl}/posts`, post);
   }
 
+  deletePost(id: number): Observable<any> {
+    return this.httpClient.delete<any>(`${this.baseUrl}/posts/${id}`);
+  }
+
   private buildQueryParams(params: any): string {
     const query = [];
     for (let param in params) {

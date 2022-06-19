@@ -1,1 +1,1 @@
-<app-profile [profile]="profile | async"></app-profile>
+<app-profile [profile]="profile | async" (accountDeleted)="deleteAccount($event)"></app-profile>

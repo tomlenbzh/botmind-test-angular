@@ -4,16 +4,8 @@ import { MainLayoutContainerComponent } from './core/containers/main-layout-cont
 import { AuthenticationGuard } from './shared/guards/auth.guard';
 
 const layoutChildren: Route[] = [
-  {
-    path: 'posts',
-    loadChildren: () => import('./posts/posts.module').then((m) => m.PostsModule),
-    data: { title: 'POSTS' }
-  },
-  {
-    path: 'users',
-    loadChildren: () => import('./users/users.module').then((m) => m.UsersModule),
-    data: { title: 'USERS' }
-  },
+  { path: 'posts', loadChildren: () => import('./posts/posts.module').then((m) => m.PostsModule) },
+  { path: 'users', loadChildren: () => import('./users/users.module').then((m) => m.UsersModule) },
   { path: '', redirectTo: 'posts', pathMatch: 'full' }
 ];
 

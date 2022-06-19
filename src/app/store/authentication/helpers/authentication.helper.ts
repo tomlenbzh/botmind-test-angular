@@ -1,10 +1,15 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { ACCESS_TOKEN } from 'src/app/authentication/utils/constants/authentication.constants';
+import { ACCESS_TOKEN } from 'src/app/shared/constants/constants';
 import { AppState } from 'src/app/store';
 import { IUser } from '../../../authentication/utils/interfaces';
-import { LOGIN_ACTION, LOGOUT_ACTION, SIGNUP_ACTION } from '../actions/authentications.actions';
+import {
+  LOGIN_ACTION,
+  LOGOUT_ACTION,
+  RESET_AUTH_STATE_ACTION,
+  SIGNUP_ACTION
+} from '../actions/authentications.actions';
 import { selectAuthErrorMessage, selectAuthLoading } from '../selectors/authentication.selectors';
 
 @Injectable({
@@ -27,6 +32,10 @@ export class AuthenticationHelper {
 
   signup(credentials: IUser): void {
     this.store.dispatch(SIGNUP_ACTION({ credentials }));
+  }
+
+  resetAuthState(): void {
+    this.store.dispatch(RESET_AUTH_STATE_ACTION());
   }
 
   logout(): void {

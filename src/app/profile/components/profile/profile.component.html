@@ -5,14 +5,56 @@
     [alt]="profile?.userName"
   />
   <div class="profile-info text-center">
+    <!-- PROFILE INFO -->
     <div class="info">
-      <h2 class="userName">{{ profile?.userName }}</h2>
-      <p class="email">{{ profile?.email }}</p>
-      <p class="name">{{ profile?.name }}</p>
+      <h2 class="userName" [textContent]="profile?.userName"></h2>
+      <p class="email" [textContent]="profile?.email"></p>
+      <p class="name" [textContent]="profile?.name"></p>
     </div>
+
+    <!-- PROFILE INFO -->
     <div class="actions">
-      <button mat-flat-button color="primary">Consulter mon feed</button>
-      <button mat-flat-button color="accent">Delete my profile</button>
+      <!-- PGO TO MY FEED -->
+      <button
+        *ngIf="!isUserFeed"
+        mat-flat-button
+        color="primary"
+        [textContent]="'PROFILE.GO_TO_MY_FEED' | translate"
+        (click)="gotToMyFeed()"
+      ></button>
+
+      <!-- SEE ALL POSTS -->
+      <button
+        *ngIf="isUserFeed"
+        mat-flat-button
+        color="primary"
+        [textContent]="'PROFILE.GO_TO_ALL_POSTS' | translate"
+        (click)="gotToAllPosts()"
+      ></button>
+
+      <!-- DELETE ACCOUNT -->
+      <button
+        mat-flat-button
+        color="accent"
+        [textContent]="'PROFILE.DELETE_PROFILE' | translate"
+        (click)="openDeleteModal()"
+      ></button>
     </div>
   </div>
 </div>
+
+<ng-template #deleteAccountDialog>
+  <h1 mat-dialog-title [textContent]="'PROFILE.DELETE_MODAL.TITLE' | translate"></h1>
+  <div mat-dialog-content>
+    <p [textContent]="'PROFILE.DELETE_MODAL.BODY' | translate"></p>
+  </div>
+  <div mat-dialog-actions class="d-flex flex-row justify-content-between">
+    <button mat-button [textContent]="'PROFILE.DELETE_MODAL.NO' | translate" (click)="closeDeleteModal()"></button>
+    <button
+      mat-raised-button
+      color="warn"
+      [textContent]="'PROFILE.DELETE_MODAL.YES' | translate"
+      (click)="deleteAccount()"
+    ></button>
+  </div>
+</ng-template>

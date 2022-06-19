@@ -6,9 +6,11 @@ import { AppState } from 'src/app/store';
 import { IUser } from '../../../authentication/utils/interfaces';
 import {
   CREATE_POST_ACTION,
+  DELETE_POST_ACTION,
   FETCH_POSTS_ACTION,
   LIKE_POST_ACTION,
-  REMOVE_LIKE_POST_ACTION
+  REMOVE_LIKE_POST_ACTION,
+  RESET_POSTS_STATE_ACTION
 } from '../actions/posts.actions';
 import { selectPosts, selectPostsLoading, selectMeta } from '../selectors/posts.selectors';
 
@@ -43,7 +45,14 @@ export class PostsHelper {
   }
 
   removeLikePost(data: ILikeData): void {
-    console.log('DATA', data);
     this.store.dispatch(REMOVE_LIKE_POST_ACTION({ data }));
+  }
+
+  resetState(): void {
+    this.store.dispatch(RESET_POSTS_STATE_ACTION());
+  }
+
+  deletePost(id: number): void {
+    this.store.dispatch(DELETE_POST_ACTION({ id }));
   }
 }
