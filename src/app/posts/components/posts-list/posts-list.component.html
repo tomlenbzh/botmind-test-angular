@@ -1,19 +1,11 @@
 <div class="posts-list" infinite-scroll [scrollWindow]="false" (scrolled)="onScroll()">
-  <app-post-form [currentUser]="currentUser" (postSubmitted)="submitPost($event)"></app-post-form>
+  <app-post-form *ngIf="canAdd" [currentUser]="currentUser" (postSubmitted)="submitPost($event)"></app-post-form>
 
-  <mat-card class="post-card" *ngFor="let post of posts">
-    <div class="post-header">
-      <div class="post-info">
-        <!-- <img [src]="post?.user?.image" class="user-image" [alt]="post?.user?.name" /> -->
-        <div class="user-info">
-          <h2 class="title">{{ post?.title }}</h2>
-          <p class="user-name">{{ post?.user?.userName }}</p>
-          <p class="date-created">{{ post?.createdAt }}</p>
-        </div>
-      </div>
-    </div>
-    <div class="post-body">
-      {{ post?.body }}
-    </div>
-  </mat-card>
+  <app-post
+    *ngFor="let post of posts"
+    [post]="post"
+    [currentUser]="currentUser"
+    (like)="likePost($event)"
+    (removelike)="removeLikePost($event)"
+  ></app-post>
 </div>

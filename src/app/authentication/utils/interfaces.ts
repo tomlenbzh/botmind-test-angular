@@ -12,6 +12,10 @@ export interface IUser {
   role?: UserRole;
 }
 
+export interface IPartialUser {
+  id: number;
+}
+
 export interface LoginInfo {
   token: string;
   user: IUser;

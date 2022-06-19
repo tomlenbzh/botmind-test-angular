@@ -1,10 +1,10 @@
-import { IUser } from 'src/app/authentication/utils/interfaces';
+import { IPartialUser, IUser } from 'src/app/authentication/utils/interfaces';
 
-export interface IPoseUser {
-  id: number;
-  name: string;
-  image: string;
-}
+// export interface IPoseUser {
+//   id: number;
+//   name: string;
+//   image: string;
+// }
 
 export interface IListMeta {
   currentPage: number;
@@ -14,6 +14,10 @@ export interface IListMeta {
   totalPages: number;
 }
 
+export interface IPartialPost {
+  id?: number;
+}
+
 export interface IPost {
   id?: number;
   title?: string;
@@ -21,9 +25,21 @@ export interface IPost {
   createdAt?: Date;
   updatedAt?: Date;
   user?: IUser;
+  likes?: ILike[];
 }
 
 export interface IPostsList {
   items: IPost[];
   meta: IListMeta;
+}
+
+export interface ILike {
+  id?: number;
+  user: IPartialUser;
+  post: IPartialPost;
+}
+
+export interface ILikeData {
+  likeId: number;
+  post: IPartialPost;
 }

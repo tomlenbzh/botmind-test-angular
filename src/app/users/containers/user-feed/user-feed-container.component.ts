@@ -1,25 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IUser } from 'src/app/authentication/utils/interfaces';
+import { IListMeta, IPost } from 'src/app/posts/utils/interfaces';
 import { PostsHelper } from 'src/app/store/posts/helpers/posts.helper';
 import { ProfileHelper } from 'src/app/store/profile/helpers/profile.helper';
-import { ILike, ILikeData, IListMeta, IPost } from '../../utils/interfaces';
 
 @Component({
+  selector: 'app-user-feed-container',
   template: `<app-posts-list
     [posts]="postsList | async"
     [meta]="meta | async"
-    [currentUser]="currentUser | async"
-    (postSubmitted)="createNewPost($event)"
+    [currentUser]="currentUser"
+    [canAdd]="false"
     (scrolled)="fetchMore($event)"
-    (like)="likePost($event)"
-    (removeLike)="removeLikePost($event)"
   ></app-posts-list>`
 })
-export class PostsListContainerComponent implements OnInit {
+export class UserFeedContainerComponent implements OnInit {
   postsList!: Observable<IPost[] | null>;
   meta!: Observable<IListMeta | null>;
-  currentUser!: Observable<IUser | null>;
+  currentUser!: IUser | null;
 
   private limit = 10;
   private page = 1;
@@ -27,28 +26,21 @@ export class PostsListContainerComponent implements OnInit {
   constructor(private postsHelper: PostsHelper, private profileHelper: ProfileHelper) {}
 
   ngOnInit(): void {
-    this.postsHelper.fetchPosts(this.limit, this.page);
     this.postsList = this.postsHelper.posts();
     this.meta = this.postsHelper.meta();
-    this.currentUser = this.profileHelper.profile();
-  }
 
-  createNewPost(post: IPost): void {
-    this.postsHelper.newPost(post);
-  }
-
-  likePost(like: ILike): void {
-    this.postsHelper.likePost(like);
-  }
-
-  removeLikePost(data: ILikeData): void {
-    this.postsHelper.removeLikePost(data);
+    this.profileHelper.profile().subscribe((user: IUser | null) => {
+      if (user) {
+        this.currentUser = user;
+        this.postsHelper.fetchPosts(this.limit, this.page, user?.id);
+      }
+    });
   }
 
   fetchMore(meta: IListMeta): void {
     if (meta.totalPages !== this.page) {
       this.page = meta.currentPage + 1;
-      this.postsHelper.fetchPosts(this.limit, this.page);
+      this.postsHelper.fetchPosts(this.limit, this.page, this.currentUser?.id);
     }
   }
 }

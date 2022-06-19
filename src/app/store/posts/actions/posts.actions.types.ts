@@ -10,5 +10,11 @@ export enum PostsActionTypes {
   DELETE_POSTS_ERROR = '[POSTS] Delete Post Error',
   CREATE_POSTS = '[POSTS] Create Post',
   CREATE_POSTS_SUCCESS = '[POSTS] Create Post Success',
-  CREATE_POSTS_ERROR = '[POSTS] Create Post Error'
+  CREATE_POSTS_ERROR = '[POSTS] Create Post Error',
+  LIKE_POSTS = '[POSTS] Like Post',
+  LIKE_POSTS_SUCCESS = '[POSTS] Like Post Success',
+  LIKE_POSTS_ERROR = '[POSTS] Like Post Error',
+  REMOVE_LIKE_POSTS = '[POSTS] Remove like Post',
+  REMOVE_LIKE_POSTS_SUCCESS = '[POSTS] Remove like Post Success',
+  REMOVE_LIKE_POSTS_ERROR = '[POSTS] Remove like Post Error'
 }

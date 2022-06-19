@@ -13,12 +13,13 @@ export class UnauthorizedInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
-      catchError((error: any) => {
-        if (error instanceof HttpErrorResponse && error.status === 401) {
-          localStorage.removeItem(ACCESS_TOKEN);
+      catchError((error: Error) => {
+        if (error instanceof HttpErrorResponse && error.status === 401 && !this.router.url.includes('/auth')) {
           this.router.navigateByUrl('/auth');
+          localStorage.removeItem(ACCESS_TOKEN);
         }
-        return throwError(() => new Error(error));
+
+        return throwError(() => error);
       })
     );
   }

@@ -33,7 +33,10 @@ export class AuthEffects {
           map((loginInfo: LoginInfo) => {
             return LOGIN_SUCCESS_ACTION(loginInfo);
           }),
-          catchError((error) => of(LOGIN_ERROR_ACTION({ error })))
+          catchError((error) => {
+            console.log('ERROR', error);
+            return of(LOGIN_ERROR_ACTION({ error }));
+          })
         )
       )
     );

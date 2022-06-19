@@ -1,1 +1,36 @@
-<p>post works!</p>
+<mat-card class="post-card">
+  <div class="post-header">
+    <div class="post-info">
+      <!-- <img [src]="post?.user?.image" class="user-image" [alt]="post?.user?.name" /> -->
+      <div class="user-info">
+        <h2 class="title">{{ post?.title }}</h2>
+        <p class="user-name">{{ post?.user?.userName }}</p>
+        <p class="date-created">{{ post?.createdAt }}</p>
+        <p>{{ likes }} people liked this post</p>
+        likedByCurrentUser: {{ likedByCurrentUser }} - isAuthor: {{ isAuthor }}
+      </div>
+    </div>
+
+    <div class="post-actions">
+      <button
+        mat-mini-fab
+        aria-label="Example icon button with a heart icon"
+        [color]="!likedByCurrentUser ? 'basic' : 'warn'"
+        (click)="manageLikes()"
+      >
+        <mat-icon>favorite</mat-icon>
+      </button>
+
+      <button mat-mini-fab aria-label="Example icon button with a heart icon" *ngIf="isAuthor" color="basic">
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <button mat-mini-fab aria-label="Example icon button with a heart icon" *ngIf="isAuthor" color="basic">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="post-body">
+    {{ post?.body }}
+  </div>
+</mat-card>

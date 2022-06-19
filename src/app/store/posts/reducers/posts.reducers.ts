@@ -10,6 +10,12 @@ import {
   FETCH_POSTS_ACTION,
   FETCH_POSTS_ERROR_ERROR,
   FETCH_POSTS_SUCCESS_ACTION,
+  LIKE_POST_ACTION,
+  LIKE_POST_ERROR_ACTION,
+  LIKE_POST_SUCCESS_ACTION,
+  REMOVE_LIKE_POST_ACTION,
+  REMOVE_LIKE_POST_ERROR_ACTION,
+  REMOVE_LIKE_POST_SUCCESS_ACTION,
   UPDATE_POST_ACTION,
   UPDATE_POST_ERROR_ACTION,
   UPDATE_POST_SUCCESS_ACTION
@@ -63,5 +69,27 @@ export const postsReducer = createReducer(
       posts: state.posts && index ? state.posts.splice(index, 1) : { ...state.posts }
     };
   }),
-  on(DELETE_POST_ERROR_ACTION, (state: PostsState): PostsState => ({ ...state, isLoading: false }))
+  on(DELETE_POST_ERROR_ACTION, (state: PostsState): PostsState => ({ ...state, isLoading: false })),
+  on(LIKE_POST_ACTION, (state: PostsState): PostsState => ({ ...state })),
+  on(
+    LIKE_POST_SUCCESS_ACTION,
+    (state: PostsState, { post }): PostsState => ({
+      ...state,
+      posts: state.posts?.map((statePost) =>
+        statePost.id === post.id ? { ...statePost, likes: post.likes } : statePost
+      )
+    })
+  ),
+  on(LIKE_POST_ERROR_ACTION, (state: PostsState): PostsState => ({ ...state })),
+  on(REMOVE_LIKE_POST_ACTION, (state: PostsState): PostsState => ({ ...state })),
+  on(
+    REMOVE_LIKE_POST_SUCCESS_ACTION,
+    (state: PostsState, { post }): PostsState => ({
+      ...state,
+      posts: state.posts?.map((statePost) =>
+        statePost.id === post.id ? { ...statePost, likes: post.likes } : statePost
+      )
+    })
+  ),
+  on(REMOVE_LIKE_POST_ERROR_ACTION, (state: PostsState): PostsState => ({ ...state }))
 );

@@ -9,6 +9,11 @@ const layoutChildren: Route[] = [
     loadChildren: () => import('./posts/posts.module').then((m) => m.PostsModule),
     data: { title: 'POSTS' }
   },
+  {
+    path: 'users',
+    loadChildren: () => import('./users/users.module').then((m) => m.UsersModule),
+    data: { title: 'USERS' }
+  },
   { path: '', redirectTo: 'posts', pathMatch: 'full' }
 ];
 

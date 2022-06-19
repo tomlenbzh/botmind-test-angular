@@ -16,7 +16,6 @@ export class PostsService {
     let url = 'posts';
     if (userId) url += `/user/${userId}`;
     url += this.buildQueryParams(queryParams);
-
     return this.httpClient.get<IPostsList>(`${this.baseUrl}/${url}`);
   }
 

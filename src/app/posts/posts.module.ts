@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [...components, ...containers],
-  imports: [CommonModule, PostsRoutingModule, SharedModule, InfiniteScrollModule, FormsModule, ReactiveFormsModule]
+  imports: [CommonModule, PostsRoutingModule, SharedModule, InfiniteScrollModule, FormsModule, ReactiveFormsModule],
+  exports: [...components, ...containers]
 })
 export class PostsModule {}

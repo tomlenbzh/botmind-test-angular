@@ -1,10 +1,15 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { IListMeta, IPost } from 'src/app/posts/utils/interfaces';
+import { ILike, ILikeData, IListMeta, IPost } from 'src/app/posts/utils/interfaces';
 import { AppState } from 'src/app/store';
 import { IUser } from '../../../authentication/utils/interfaces';
-import { CREATE_POST_ACTION, FETCH_POSTS_ACTION } from '../actions/posts.actions';
+import {
+  CREATE_POST_ACTION,
+  FETCH_POSTS_ACTION,
+  LIKE_POST_ACTION,
+  REMOVE_LIKE_POST_ACTION
+} from '../actions/posts.actions';
 import { selectPosts, selectPostsLoading, selectMeta } from '../selectors/posts.selectors';
 
 @Injectable({
@@ -31,5 +36,14 @@ export class PostsHelper {
 
   newPost(post: IPost): void {
     this.store.dispatch(CREATE_POST_ACTION({ post }));
+  }
+
+  likePost(like: ILike): void {
+    this.store.dispatch(LIKE_POST_ACTION({ like }));
+  }
+
+  removeLikePost(data: ILikeData): void {
+    console.log('DATA', data);
+    this.store.dispatch(REMOVE_LIKE_POST_ACTION({ data }));
   }
 }
