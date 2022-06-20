@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
-import { AuthenticationHelper } from 'src/app/store/authentication/helpers/authentication.helper';
+import { AuthHelper } from '@app/store/auth/auth.helper';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +8,7 @@ import { AuthenticationHelper } from 'src/app/store/authentication/helpers/authe
 export class AuthenticationGuard implements CanActivate {
   authRoutes = ['/auth/login', '/auth/signup'];
 
-  constructor(private authHelper: AuthenticationHelper, private router: Router) {}
+  constructor(private authHelper: AuthHelper, private router: Router) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (this.authRoutes.includes(state.url) || state.url === '') {
@@ -24,7 +23,6 @@ export class AuthenticationGuard implements CanActivate {
         this.router.navigateByUrl('/auth');
         return false;
       }
-
       return true;
     }
   }

@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewC
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { IUser } from 'src/app/authentication/utils/interfaces';
+import { IUser } from '@auth/utils/interfaces';
 import { ProfileFormName } from '../../utils/profile.constants';
 
 @Component({

@@ -1,8 +1,9 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IUser } from 'src/app/authentication/utils/interfaces';
-import { PostsHelper } from 'src/app/store/posts/helpers/posts.helper';
-import { ProfileHelper } from 'src/app/store/profile/helpers/profile.helper';
+
+import { IUser } from '@auth/utils/interfaces';
+import { PostsHelper } from '@app/store/posts/posts.helper';
+import { ProfileHelper } from '@app/store/profile/profile.helper';
 import { ILike, ILikeData, IListMeta, IPost } from '../../utils/interfaces';
 
 @Component({
@@ -48,26 +49,56 @@ export class PostsListContainerComponent implements OnInit, OnDestroy {
     this.postsHelper.resetState();
   }
 
+  /**
+   * Creates a new post.
+   *
+   * @param     { IPost }     post
+   */
   createNewPost(post: IPost): void {
     this.postsHelper.newPost(post);
   }
 
+  /**
+   * Adds one like to a specific post.
+   *
+   * @param     { IPost }     post
+   */
   likePost(like: ILike): void {
     this.postsHelper.likePost(like);
   }
 
+  /**
+   * Removes one like from a specific post.
+   *
+   * @param     { IPost }     post
+   */
   removeLikePost(data: ILikeData): void {
     this.postsHelper.removeLikePost(data);
   }
 
+  /**
+   * Deletes an existing post.
+   *
+   * @param     { IPost }     post
+   */
   deletePost(id: number): void {
     this.postsHelper.deletePost(id);
   }
 
+  /**
+   * Edits an existing post.
+   *
+   * @param     { IPost }     post
+   */
   editPost(post: IPost): void {
     this.postsHelper.editPost(post);
   }
 
+  /**
+   * Increments the page number anf fetches {{ limit }} more items to inject in the list.
+   *
+   * @param     { IPost }     post
+   */
   fetchMore(meta: IListMeta): void {
     if (meta.totalPages !== this.page) {
       this.page = meta.currentPage + 1;

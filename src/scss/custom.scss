@@ -377,3 +377,9 @@
 .cursor-pointer {
   cursor: pointer !important;
 }
+
+form {
+  .mat-form-field {
+    width: 100%;
+  }
+}

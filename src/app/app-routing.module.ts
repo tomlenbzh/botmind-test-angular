@@ -12,7 +12,7 @@ const layoutChildren: Route[] = [
 const routes: Routes = [
   {
     path: 'auth',
-    loadChildren: () => import('./authentication/authentication.module').then((m) => m.AuthenticationModule),
+    loadChildren: () => import('./auth/authentication.module').then((m) => m.AuthModule),
     canActivate: [AuthenticationGuard]
   },
   {

@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { UserFeedComponent } from './user-feed.component';
 
 describe('UserFeedComponent', () => {
@@ -18,7 +17,5 @@ describe('UserFeedComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  it('should create', () => expect(component).toBeTruthy());
 });

@@ -1,4 +1,4 @@
-import { IPartialUser, IUser } from 'src/app/authentication/utils/interfaces';
+import { IPartialUser, IUser } from '@auth/utils/interfaces';
 
 // export interface IPoseUser {
 //   id: number;

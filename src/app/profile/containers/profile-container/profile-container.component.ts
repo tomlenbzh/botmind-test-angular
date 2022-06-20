@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IUser } from 'src/app/authentication/utils/interfaces';
-import { ProfileHelper } from 'src/app/store/profile/helpers/profile.helper';
+import { IUser } from '@auth/utils/interfaces';
+import { ProfileHelper } from '@app/store/profile/profile.helper';
 
 @Component({
   selector: 'app-profile-container',
