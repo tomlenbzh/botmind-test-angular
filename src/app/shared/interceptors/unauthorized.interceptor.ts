@@ -11,6 +11,13 @@ import { ACCESS_TOKEN } from '../constants/constants';
 export class UnauthorizedInterceptor implements HttpInterceptor {
   constructor(private router: Router) {}
 
+  /**
+   * Logs the user out when a 401 error is returned.
+   *
+   * @param     { HttpRequest<any> }      request
+   * @param     { HttpHandler }           next
+   * @returns   { Observable<HttpEvent<any>> }
+   */
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       catchError((error: Error) => {

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { IUser } from 'src/app/authentication/utils/interfaces';
-import { IListMeta, IPost } from 'src/app/posts/utils/interfaces';
+import { IUser } from '@auth/utils/interfaces';
+import { IListMeta, IPost } from '@posts/utils/interfaces';
 
 @Component({
   selector: 'app-user-feed',

@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatDrawer, MatDrawerMode } from '@angular/material/sidenav';
 import { TranslateService } from '@ngx-translate/core';
-import { IUser } from 'src/app/authentication/utils/interfaces';
-import { ACCEPTED_LANGUAGES, LANG, SELECTED_LANGUAGE } from 'src/app/shared/constants/constants';
+
+import { IUser } from '@auth/utils/interfaces';
+import { ACCEPTED_LANGUAGES, LANG, SELECTED_LANGUAGE } from '@shared/constants/constants';
 
 @Component({
   selector: 'app-main-layout',
@@ -29,19 +30,33 @@ export class MainLayoutComponent implements OnChanges {
     }
   }
 
+  /**
+   * Closes / Opens a MatDrawer child instance.
+   */
   toggleDrawer(): void {
     this.drawer.toggle();
   }
 
+  /**
+   * Emits to the parent component that the user should logout.
+   */
   logout(): void {
     this.loggedOut.emit();
   }
 
+  /**
+   * Emits the new profile configuration to the parent component when language is changed.
+   *
+   * @param     { LANG }      lang
+   */
   changeLang(lang: LANG): void {
     const profile = { ...this.profile, lang };
     this.langChanged.emit(profile);
   }
 
+  /**
+   * Sets app's current languages and stores it in localstorage.
+   */
   setCurrentLang(): void {
     if (this.profile?.lang && this.profile.lang !== this.translate.currentLang) {
       this.translate.setDefaultLang(this.profile.lang);

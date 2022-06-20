@@ -14,23 +14,22 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { StoreModule } from '@ngrx/store';
 import { environment } from 'src/environments/environment.prod';
 import { EffectsModule } from '@ngrx/effects';
-import { AuthEffects } from '../store/authentication/effects/authentication.effects';
+import { AuthEffects } from '../store/auth/auth.effects';
 import { reducers, metaReducers } from '../store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
-import { UserInfoComponent } from './components/user-info/user-info.component';
-import { ProfileEffects } from '../store/profile/effects/profile.effects';
+import { ProfileEffects } from '../store/profile/profile.effects';
 import { ProfileModule } from '../profile/profile.module';
 import { TokenInterceptor } from '../shared/interceptors/headers.interceptor';
 import { UnauthorizedInterceptor } from '../shared/interceptors/unauthorized.interceptor';
-import { PostsEffects } from '../store/posts/effects/posts.effects';
+import { PostsEffects } from '../store/posts/posts.effects';
 
 // import ngx-translate and the http loader
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 @NgModule({
-  declarations: [AppComponent, ...components, ...containers, UserInfoComponent],
+  declarations: [AppComponent, ...components, ...containers],
   imports: [
     CommonModule,
     SharedModule,

@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
-import { IUser } from 'src/app/authentication/utils/interfaces';
-import { PostFormControlsNames } from '../../constants/posts.constants';
+
+import { IUser } from '@auth/utils/interfaces';
+import { PostFormControlsNames } from '../../utils/posts.constants';
 import { IPost } from '../../utils/interfaces';
 
 @Component({
@@ -62,6 +63,9 @@ export class PostFormComponent implements OnInit, OnChanges {
     }
   }
 
+  /**
+   * Creates a new formGroup instance.
+   */
   private createForm(): void {
     this.form = this.formBuilder.group({
       [this.controlNames.TITLE]: new FormControl('', [Validators.required, Validators.maxLength(50)]),
@@ -69,6 +73,9 @@ export class PostFormComponent implements OnInit, OnChanges {
     });
   }
 
+  /**
+   * Injects the current's post information in the form.
+   */
   private setFormWithCurrentPost(): void {
     if (this.currentUser && this.currentPost && this.editMode && this.form) {
       this.form.patchValue({

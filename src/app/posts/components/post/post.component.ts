@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { IUser } from 'src/app/authentication/utils/interfaces';
-import { ILike, ILikeData, IPost } from '../../utils/interfaces';
-import * as moment from 'moment';
 import { TranslateService } from '@ngx-translate/core';
+import * as moment from 'moment';
+
+import { IUser } from '@auth/utils/interfaces';
+import { ILike, ILikeData, IPost } from '../../utils/interfaces';
 
 @Component({
   selector: 'app-post',
@@ -56,20 +57,32 @@ export class PostComponent implements OnChanges {
     }
   }
 
+  /**
+   * Removes a like if there is one, add one if there is none.
+   */
   manageLikes(): void {
     !this.likedByCurrentUser ? this.likePost() : this.removeLikePost();
   }
 
+  /**
+   * Determines if the post is being edited.
+   */
   toggleEdit() {
     this.isEditing = !this.isEditing;
   }
 
+  /**
+   * Navigates to the current user's personal feed.
+   */
   gotToUser(): void {
     if (this.currentUser) {
       this.router.navigateByUrl(`/app/users/${this.currentUser.id}`);
     }
   }
 
+  /**
+   * Notifies the parent component that the current post should be deleted.
+   */
   deletePost(): void {
     if (this.post?.id) {
       this.delete.emit(this.post.id);
@@ -77,21 +90,35 @@ export class PostComponent implements OnChanges {
     }
   }
 
+  /**
+   * Shows / Hides the post edit form.
+   *
+   * @param     { IPost }      post
+   */
   editPost(post: IPost): void {
     this.toggleEdit();
     this.edit.emit(post);
   }
 
+  /**
+   * Opens a MatDialogRef instance containing the post delete modale template.
+   */
   openDeleteModal(): void {
     this.dialogRef = this.dialog.open(this.deletePostDialog);
   }
 
+  /**
+   * Closes a MatDialogRef instance if it exists.
+   */
   closeDeleteModal(): void {
     if (this.dialog) {
       this.dialogRef.close();
     }
   }
 
+  /**
+   * Emis information to notify that a like should be added.
+   */
   private likePost(): void {
     if (this.currentUser?.id && this.post) {
       const like: ILike = {
@@ -102,6 +129,9 @@ export class PostComponent implements OnChanges {
     }
   }
 
+  /**
+   * Emis information to notify that the current like should be removed.
+   */
   private removeLikePost(): void {
     if (this.currentUserLike.id) {
       const data: ILikeData = {
@@ -112,14 +142,29 @@ export class PostComponent implements OnChanges {
     }
   }
 
+  /**
+   * Checks if the current user is the author of this post.
+   *
+   * @param     { number }      postUserId
+   * @param     { number }      currentUserId
+   */
   private checkIsAuthor(postUserId: number, currentUserId: number): void {
     this.isAuthor = postUserId === currentUserId;
   }
 
+  /**
+   * Sets the displayed number of likes
+   */
   private setLikesNumber(): void {
     this.likes = this.post.likes?.length || 0;
   }
 
+  /**
+   * Checks if the current user has liked this post.
+   *
+   * @param     { ILike[] }       likes
+   * @param     { IUser }         currentUser
+   */
   private checkIfLikedByCurrentUser(likes: ILike[], currentUser: IUser): void {
     this.likedByCurrentUser = likes.some((like: ILike) => like.user.id === currentUser.id);
     if (this.likedByCurrentUser) {
