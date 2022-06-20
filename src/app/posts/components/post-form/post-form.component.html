@@ -5,7 +5,7 @@
   class="post-form"
   [ngClass]="{ 'mt20 mb0': editMode }"
 >
-  <h2 [textContent]="(!editMode ? 'POSTS.TITLE' : 'EDIT POST') | translate"></h2>
+  <h2 [textContent]="(!editMode ? 'POSTS.TITLE' : 'POSTS.EDIT') | translate"></h2>
 
   <!-- +++++ TITLE FIELD +++++ -->
   <mat-form-field appearance="outline">
@@ -52,10 +52,17 @@
   </mat-form-field>
 
   <!-- +++++ PUBLISH POST +++++ -->
-  <div class="post-form-footer mt20">
+  <div class="post-form-footer mt20" [ngClass]="{ edit: editMode }">
+    <button mat-button *ngIf="editMode" (click)="cancelEdit()">
+      <span [textContent]="'POSTS.FORM.CANCEL' | translate"></span>
+    </button>
+
     <button mat-flat-button color="primary" type="submit">
-      <span [textContent]="'POSTS.FORM.PUBLISH' | translate"></span>
-      <mat-icon matSuffix class="ml10">send</mat-icon>
+      <span [textContent]="(editMode ? 'POSTS.FORM.EDIT' : 'POSTS.FORM.PUBLISH') | translate"></span>
+      <mat-icon matSuffix class="ml10">
+        <span *ngIf="!editMode">send</span>
+        <span *ngIf="editMode">edit</span>
+      </mat-icon>
     </button>
   </div>
 </form>

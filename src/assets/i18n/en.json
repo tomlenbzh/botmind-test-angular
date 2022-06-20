@@ -62,6 +62,7 @@
   },
   "POSTS": {
     "TITLE": "Write a new post",
+    "EDIT": "Edit your post",
     "NO_POSTS": "No posts have been published yet",
     "FORM": {
       "TITLE": "Post title",
@@ -70,6 +71,8 @@
       "BODY_PLACEHOLDER": "lorem ipsum dolor sit amet...",
       "FIELD_MAX_LENGTH": "{{ count }} / {{ max }}",
       "PUBLISH": "Publish",
+      "EDIT": "Validate",
+      "CANCEL": "Cancel",
       "ERRORS": {
         "TITLE_LENGTH": "Title's length is limited to <strong>{{ count }}</strong> characters",
         "TITLE_REQUIRED": "Post title is <strong>required</strong>",

@@ -1,10 +1,10 @@
 <mat-card class="post-card">
   <div class="post-header">
     <div class="post-info">
-      <img [src]="placeholder" class="user-image" [alt]="post?.user?.name" />
+      <img [src]="profileImage || placeholder" class="user-image" [alt]="currentUser?.userName" />
       <div class="user-info">
         <p class="user-name text-bold" [textContent]="post?.user?.userName" (click)="gotToUser()"></p>
-        <p class="date-created" [textContent]="post?.createdAt"></p>
+        <p class="date-created" [textContent]="updatedAt"></p>
       </div>
     </div>
 
@@ -53,6 +53,7 @@
       [currentPost]="post"
       [editMode]="true"
       (postEdited)="editPost($event)"
+      (editCancelled)="toggleEdit()"
     ></app-post-form>
   </ng-template>
 </mat-card>

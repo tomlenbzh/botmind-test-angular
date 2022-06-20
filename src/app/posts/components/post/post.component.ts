@@ -3,6 +3,8 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { IUser } from 'src/app/authentication/utils/interfaces';
 import { ILike, ILikeData, IPost } from '../../utils/interfaces';
+import * as moment from 'moment';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-post',
@@ -27,19 +29,30 @@ export class PostComponent implements OnChanges {
   likedByCurrentUser = false;
   currentUserLike!: ILike;
   placeholder = 'https://www.in.gov/bmv/images/profile-placeholder.png';
+  updatedAt!: string;
+  profileImage: string | null = null;
 
-  constructor(private router: Router, private dialog: MatDialog) {}
+  constructor(private router: Router, private dialog: MatDialog, private translate: TranslateService) {}
 
   ngOnChanges(): void {
-    if (this.post && this.currentUser) {
-      if (this.post.user?.id && this.currentUser.id) {
-        this.checkIsAuthor(this.post.user?.id, this.currentUser.id);
+    if (this.post) {
+      if (this.currentUser) {
+        if (this.post.user?.id && this.currentUser.id) {
+          this.checkIsAuthor(this.post.user?.id, this.currentUser.id);
+          if (this.isAuthor) {
+            this.profileImage = this.currentUser.image ? `${this.currentUser.image}?${Date.now()}` : this.placeholder;
+          } else {
+            this.profileImage = this.post.user.image || this.placeholder;
+          }
+        }
+
+        if (this.post.likes) {
+          this.setLikesNumber();
+          this.checkIfLikedByCurrentUser(this.post.likes, this.currentUser);
+        }
       }
 
-      if (this.post.likes) {
-        this.setLikesNumber();
-        this.checkIfLikedByCurrentUser(this.post.likes, this.currentUser);
-      }
+      this.updatedAt = moment(this.post.updatedAt).locale(this.translate.currentLang).fromNow();
     }
   }
 

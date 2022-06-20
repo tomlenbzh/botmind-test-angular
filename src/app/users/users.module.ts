@@ -5,9 +5,10 @@ import { components } from './components';
 import { containers } from './containers';
 import { SharedModule } from '../shared/shared.module';
 import { PostsModule } from '../posts/posts.module';
+import { ProfileModule } from '../profile/profile.module';
 
 @NgModule({
   declarations: [...components, ...containers],
-  imports: [CommonModule, UsersRoutingModule, SharedModule, PostsModule]
+  imports: [CommonModule, UsersRoutingModule, SharedModule, PostsModule, ProfileModule]
 })
 export class UsersModule {}

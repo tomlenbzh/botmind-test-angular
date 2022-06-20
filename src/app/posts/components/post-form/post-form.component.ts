@@ -16,6 +16,7 @@ export class PostFormComponent implements OnInit, OnChanges {
 
   @Output() postSubmitted: EventEmitter<IPost> = new EventEmitter<IPost>();
   @Output() postEdited: EventEmitter<IPost> = new EventEmitter<IPost>();
+  @Output() editCancelled: EventEmitter<IPost> = new EventEmitter<IPost>();
 
   controlNames = PostFormControlsNames;
   form!: FormGroup;
@@ -43,6 +44,10 @@ export class PostFormComponent implements OnInit, OnChanges {
     }
   }
 
+  cancelEdit(): void {
+    this.editCancelled.emit();
+  }
+
   submitForm(formDirective: FormGroupDirective): void {
     if (this.form.valid) {
       if (this.editMode) {
@@ -66,7 +71,6 @@ export class PostFormComponent implements OnInit, OnChanges {
 
   private setFormWithCurrentPost(): void {
     if (this.currentUser && this.currentPost && this.editMode && this.form) {
-      console.log('GET IN ?');
       this.form.patchValue({
         [this.controlNames.TITLE]: this.currentPost?.title,
         [this.controlNames.BODY]: this.currentPost?.body

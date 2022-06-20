@@ -62,6 +62,7 @@
   },
   "POSTS": {
     "TITLE": "Écrire un nouveau post",
+    "EDIT": "Éditer votre poste",
     "NO_POSTS": "Aucun post n'a été publié pour le moment",
     "FORM": {
       "TITLE": "Titre du post",
@@ -69,7 +70,9 @@
       "BODY": "Contenu du post",
       "BODY_PLACEHOLDER": "lorem ipsum dolor sit amet...",
       "FIELD_MAX_LENGTH": "{{ count }} / {{ max }}",
-      "PUBLISH": "Publier",
+      "PUBLISH": "Publish",
+      "EDIT": "Valider",
+      "CANCEL": "Annuler",
       "ERRORS": {
         "TITLE_LENGTH": "Le titre est limité à <strong>{{ count }}</strong> caractères",
         "TITLE_REQUIRED": "Le titre est <strong>requis</strong>",
@@ -101,6 +104,16 @@
       "BODY": "Si vous cliquez sur \"Supprimer mon compte\", votre compte sera supprimé de manière permanente, ainsi que tous vos posts données associées.",
       "YES": "Supprimer mon compte",
       "NO": "Annuler"
+    },
+    "EDIT_PROFILE": "Modifier votre profil",
+    "EDIT_MODAL": {
+      "TITLE": "Modifiez votre profil",
+      "IMAGE": "URL de votre photo de profil",
+      "IMAGE_REQUIRED": "L'URL de votre photo de profil est <strong>requise</strong>",
+      "DESCRIPTION": "Description",
+      "DESCRIPTION_PLACEHOLDER": "I'm awesome",
+      "DESCRIPTION_REQUIRED": "Votre description est <strong>requise</strong>",
+      "DESCRIPTION_LENGTH": "Votre description est limitée à <strong>{{ count }} caractères</strong>"
     }
   },
   "CREDENTIALS_ALREADY_EXIST": "Le même email ou le même pseudo est déjà pris",
