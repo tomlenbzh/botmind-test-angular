@@ -70,7 +70,7 @@
       "BODY": "Contenu du post",
       "BODY_PLACEHOLDER": "lorem ipsum dolor sit amet...",
       "FIELD_MAX_LENGTH": "{{ count }} / {{ max }}",
-      "PUBLISH": "Publish",
+      "PUBLISH": "Publier",
       "EDIT": "Valider",
       "CANCEL": "Annuler",
       "ERRORS": {

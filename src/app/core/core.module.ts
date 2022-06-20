@@ -27,6 +27,7 @@ import { PostsEffects } from '../store/posts/posts.effects';
 // import ngx-translate and the http loader
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { UserEffects } from '@app/store/user/user.effects';
 
 @NgModule({
   declarations: [AppComponent, ...components, ...containers],
@@ -49,7 +50,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     InfiniteScrollModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    EffectsModule.forRoot([AuthEffects, ProfileEffects, PostsEffects]),
+    EffectsModule.forRoot([AuthEffects, ProfileEffects, PostsEffects, UserEffects]),
     StoreRouterConnectingModule.forRoot({ routerState: RouterState.Minimal }),
     ProfileModule
   ],

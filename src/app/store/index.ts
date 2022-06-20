@@ -6,16 +6,19 @@ import { AuthState, authReducer } from './auth/auth.reducer';
 import { ProfileState, profileReducer } from './profile/profile.reducer';
 import { PostsState, postsReducer } from './posts/posts.reducers';
 import { AuthActionTypes } from './auth/auth.actions.types';
+import { userReducer, UserState } from './user/user.reducer';
 
 export interface AppState {
   auth: AuthState;
   profile: ProfileState;
+  user: UserState;
   posts: PostsState;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
   auth: authReducer,
   profile: profileReducer,
+  user: userReducer,
   posts: postsReducer
 };
 

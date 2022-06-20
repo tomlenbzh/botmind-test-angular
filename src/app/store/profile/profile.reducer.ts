@@ -36,7 +36,6 @@ export const profileReducer = createReducer(
     (state: ProfileState, { user }): ProfileState => ({ ...state, isLoading: false, profile: user })
   ),
   on(UPDATE_PROFILE_ERROR_ACTION, (state: ProfileState): ProfileState => ({ ...state, isLoading: false })),
-
   on(DELETE_PROFILE_ACTION, (state: ProfileState): ProfileState => ({ ...state, isLoading: true })),
   on(
     DELETE_PROFILE_SUCCESS_ACTION,

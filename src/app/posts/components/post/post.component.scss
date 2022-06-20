@@ -1,3 +1,5 @@
+@import '../../../../scss/variables.scss';
+
 .post-card {
   margin-bottom: 20px;
 
@@ -64,8 +66,8 @@
   position: absolute;
   top: 0px;
   right: -7px;
-  background: black;
-  color: white;
+  background: $black;
+  color: $white;
   width: 20px;
   height: 20px;
   font-size: 10px;

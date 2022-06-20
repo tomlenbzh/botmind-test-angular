@@ -37,6 +37,7 @@ export class PostsListContainerComponent implements OnInit, OnDestroy {
     this.postsHelper.resetState();
     this.postsList = this.postsHelper.posts();
     this.meta = this.postsHelper.meta();
+
     this.profileHelper.profile().subscribe((user: IUser | null) => {
       this.postsHelper.resetState();
       this.currentUser = user;

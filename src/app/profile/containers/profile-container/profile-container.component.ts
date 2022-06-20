@@ -9,7 +9,6 @@ import { ProfileHelper } from '@app/store/profile/profile.helper';
     [profile]="profile | async"
     [header]="header"
     (accountDeleted)="deleteAccount($event)"
-    (profileUpdated)="updateProfile($event)"
   ></app-profile>`
 })
 export class ProfileContainerComponent implements OnInit {
@@ -26,12 +25,6 @@ export class ProfileContainerComponent implements OnInit {
   deleteAccount(profile: IUser): void {
     if (profile.id) {
       this.profileHelper.deleteProfile(profile.id);
-    }
-  }
-
-  updateProfile(profile: IUser): void {
-    if (profile.id) {
-      this.profileHelper.updateProfile(profile.id, profile);
     }
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IUser } from '@auth/utils/interfaces';
 import { IListMeta, IPost } from '@posts/utils/interfaces';
 
@@ -8,7 +8,12 @@ import { IListMeta, IPost } from '@posts/utils/interfaces';
   styleUrls: ['./user-feed.component.scss']
 })
 export class UserFeedComponent {
-  @Input() postsList!: IPost[] | null;
-  @Input() meta!: IListMeta | null;
   @Input() currentUser!: IUser | null;
+  @Input() profile!: IUser | null;
+
+  @Output() profileUpdated: EventEmitter<IUser> = new EventEmitter<IUser>();
+
+  updateProfile(profile: IUser): void {
+    this.profileUpdated.emit(profile);
+  }
 }

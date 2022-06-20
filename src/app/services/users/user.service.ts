@@ -7,22 +7,22 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class ProfileService {
+export class UserService {
   private baseUrl = environment.baseUrl;
 
   constructor(private httpClient: HttpClient) {}
 
-  fetchProfile(id: number): Observable<IUser> {
+  fetchUser(id: number): Observable<IUser> {
     const url = `${this.baseUrl}/users/${id}`;
     return this.httpClient.get<IUser>(url);
   }
 
-  updateProfile(id: number, user: IUser): Observable<IUser> {
+  updateUser(id: number, user: IUser): Observable<IUser> {
     const url = `${this.baseUrl}/users/${id}`;
     return this.httpClient.put<IUser>(url, user);
   }
 
-  deletProfile(id: number): Observable<IUser> {
+  deletUser(id: number): Observable<IUser> {
     const url = `${this.baseUrl}/users/${id}`;
     return this.httpClient.delete<IUser>(url);
   }

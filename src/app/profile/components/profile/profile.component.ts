@@ -15,28 +15,15 @@ export class ProfileComponent implements OnChanges {
   @Input() header = false;
 
   @Output() accountDeleted: EventEmitter<IUser> = new EventEmitter<IUser>();
-  @Output() profileUpdated: EventEmitter<IUser> = new EventEmitter<IUser>();
 
   @ViewChild('deleteAccountDialog') deleteAccountDialog!: any;
-  @ViewChild('editProfileDialog') editProfileDialog!: any;
 
   dialogRef!: MatDialogRef<any>;
-  form!: FormGroup;
-  inputNames = ProfileFormName;
-  descMaxLength = 200;
   placeholder = 'https://www.in.gov/bmv/images/profile-placeholder.png';
   profileImage: string | null = null;
 
   get isUserFeed(): boolean {
     return this.profile?.id && this.router.url === `/app/users/${this.profile.id}` ? true : false;
-  }
-
-  get imageCtrl() {
-    return this.form.get(this.inputNames.IMAGE);
-  }
-
-  get descriptionCtrl() {
-    return this.form.get(this.inputNames.DESCRIPTION);
   }
 
   constructor(private router: Router, private dialog: MatDialog, private formBuilder: FormBuilder) {}
@@ -68,30 +55,5 @@ export class ProfileComponent implements OnChanges {
 
   closeModal() {
     if (this.dialogRef) this.dialogRef.close();
-  }
-
-  editProfile(): void {
-    this.dialogRef = this.dialog.open(this.editProfileDialog);
-    this.form = this.formBuilder.group({
-      [this.inputNames.DESCRIPTION]: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(this.descMaxLength)
-      ]),
-      [this.inputNames.IMAGE]: new FormControl('', [Validators.required])
-    });
-    if (this.profile) {
-      this.form.patchValue({
-        [this.inputNames.DESCRIPTION]: this.profile?.description,
-        [this.inputNames.IMAGE]: this.profile?.image || ''
-      });
-    }
-  }
-
-  submitProfile(): void {
-    if (this.form.valid) {
-      const newUser: IUser = { ...this.profile, ...this.form.getRawValue() };
-      this.profileUpdated.emit(newUser);
-      this.closeModal();
-    }
   }
 }

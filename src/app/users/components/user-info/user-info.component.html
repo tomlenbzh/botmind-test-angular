@@ -1,0 +1,84 @@
+<div class="user">
+  <div class="user-content">
+    <img [src]="userImage || placeholder" class="user-image" [alt]="user?.userName" />
+
+    <!-- +++++ PROFILE INFO +++++ -->
+    <div class="user-info">
+      <div class="info">
+        <h2 class="userName" [textContent]="user?.userName"></h2>
+        <p class="email" [textContent]="user?.email"></p>
+        <p class="name" [textContent]="user?.name"></p>
+      </div>
+    </div>
+    <div class="description" [textContent]="user?.description"></div>
+  </div>
+
+  <button
+    *ngIf="isUserProfile"
+    mat-mini-fab
+    color="accent"
+    class="edit-desc-btn"
+    [matTooltip]="'PROFILE.EDIT_PROFILE' | translate"
+    (click)="editProfile()"
+  >
+    <mat-icon>description</mat-icon>
+  </button>
+</div>
+
+<!-- +++++ EDIT PROFILE DESCRIPTION +++++ -->
+<ng-template #editProfileDialog>
+  <h1 mat-dialog-title [textContent]="'PROFILE.EDIT_MODAL.TITLE' | translate"></h1>
+  <div mat-dialog-content>
+    <form [formGroup]="form" #formDirective="ngForm" class="profile-form">
+      <!-- +++++ TITLE FIELD +++++ -->
+      <mat-form-field appearance="outline" class="mb10">
+        <mat-label [textContent]="'PROFILE.EDIT_MODAL.IMAGE' | translate"></mat-label>
+        <input matInput [formControlName]="inputNames.IMAGE" />
+        <mat-error *ngIf="imageCtrl?.invalid && (imageCtrl?.dirty || imageCtrl?.touched)">
+          <div
+            *ngIf="imageCtrl?.hasError('required')"
+            [innerHTML]="'PROFILE.EDIT_MODAL.IMAGE_REQUIRED' | translate"
+          ></div>
+        </mat-error>
+      </mat-form-field>
+
+      <!-- +++++ DESCRIPTION FIELD +++++ -->
+      <mat-form-field appearance="outline" class="mb10">
+        <mat-label [textContent]="'PROFILE.EDIT_MODAL.DESCRIPTION' | translate"></mat-label>
+        <textarea
+          matInput
+          [placeholder]="'PROFILE.EDIT_MODAL.DESCRIPTION_PLACEHOLDER' | translate"
+          [formControlName]="inputNames.DESCRIPTION"
+        ></textarea>
+        <mat-hint
+          [align]="'end'"
+          [textContent]="
+            'POSTS.FORM.FIELD_MAX_LENGTH'
+              | translate: { count: descriptionCtrl?.value?.length || 0, max: descMaxLength }
+          "
+        ></mat-hint>
+        <mat-error *ngIf="descriptionCtrl?.invalid && (descriptionCtrl?.dirty || descriptionCtrl?.touched)">
+          <div
+            *ngIf="descriptionCtrl?.hasError('maxlength') && !descriptionCtrl?.hasError('required')"
+            [innerHTML]="'PROFILE.EDIT_MODAL.DESCRIPTION_LENGTH' | translate: { count: descMaxLength }"
+          ></div>
+          <div
+            *ngIf="descriptionCtrl?.hasError('required')"
+            [innerHTML]="'PROFILE.EDIT_MODAL.DESCRIPTION_REQUIRED' | translate"
+          ></div>
+        </mat-error>
+      </mat-form-field>
+
+      <!-- +++++ MODAL FOOTER +++++ -->
+      <div mat-dialog-actions class="d-flex flex-row justify-content-between edit-footer">
+        <button mat-button [textContent]="'PROFILE.DELETE_MODAL.NO' | translate" (click)="closeModal()"></button>
+        <button
+          mat-raised-button
+          color="primary"
+          [textContent]="'POSTS.FORM.EDIT' | translate"
+          (click)="submitProfile()"
+        ></button>
+      </div>
+    </form>
+  </div>
+</ng-template>

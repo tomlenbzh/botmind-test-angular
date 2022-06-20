@@ -75,8 +75,8 @@ export class PostComponent implements OnChanges {
    * Navigates to the current user's personal feed.
    */
   gotToUser(): void {
-    if (this.currentUser) {
-      this.router.navigateByUrl(`/app/users/${this.currentUser.id}`);
+    if (this.post.user?.id) {
+      this.router.navigateByUrl(`/app/users/${this.post.user.id}`);
     }
   }
 

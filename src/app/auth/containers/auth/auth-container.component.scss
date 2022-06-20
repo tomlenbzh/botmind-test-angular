@@ -1,3 +1,5 @@
+@import '../../../../scss/variables.scss';
+
 $form-width: 450px;
 $form-padding: 30px;
 
@@ -17,10 +19,12 @@ $form-padding: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: $white;
+    padding: 0 20px;
 
     h1 {
       font-size: 48px;
+      line-height: 54px;
     }
   }
 
