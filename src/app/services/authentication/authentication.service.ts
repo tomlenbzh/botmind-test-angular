@@ -14,6 +14,7 @@ export class AuthenticationService {
 
   login(credentials: IUser): Observable<any> {
     const url = `${this.baseUrl}/users/login`;
+    console.log('URL', url);
     return this.httpClient.post<any>(url, credentials);
   }
 
