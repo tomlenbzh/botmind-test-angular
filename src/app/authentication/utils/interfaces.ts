@@ -6,11 +6,13 @@ export enum UserRole {
 export interface IUser {
   id?: number;
   name?: string;
+  image?: string;
   userName?: string;
   email?: string;
   password?: string;
   lang?: string;
   role?: UserRole;
+  description?: string;
 }
 
 export interface IPartialUser {

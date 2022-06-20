@@ -15,5 +15,14 @@
   .post-form-footer {
     display: flex;
     justify-content: flex-end;
+
+    .mat-icon {
+      font-size: inherit;
+      height: auto;
+    }
+
+    &.edit {
+      justify-content: space-between;
+    }
   }
 }

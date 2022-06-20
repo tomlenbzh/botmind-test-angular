@@ -11,6 +11,54 @@
     margin-bottom: 30px;
   }
 
+  &.header {
+    padding: 20px;
+    background: rgb(21 42 51);
+    margin-bottom: 30px;
+    border-radius: 4px;
+    position: relative;
+
+    .profile-content {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .description {
+      position: relative;
+      font-size: 14px;
+      font-style: italic;
+      color: white;
+      margin: auto;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .edit-desc-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+    }
+
+    .profile-image {
+      margin: 0;
+    }
+
+    .profile-info {
+      margin-left: 20px;
+
+      .userName {
+        color: white;
+      }
+
+      .email,
+      .name {
+        margin-bottom: 5px;
+        color: #dcdcdc;
+      }
+    }
+  }
+
   .profile-info {
     .userName {
       font-size: 30px;
@@ -25,4 +73,16 @@
       width: 100%;
     }
   }
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+.edit-footer {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 0;
 }

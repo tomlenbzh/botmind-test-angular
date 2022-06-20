@@ -10,7 +10,7 @@ import { ILike, ILikeData, IListMeta, IPost } from '../../utils/interfaces';
   template: `<app-posts-list
     [posts]="postsList | async"
     [meta]="meta | async"
-    [currentUser]="currentUser | async"
+    [currentUser]="currentUser"
     (postSubmitted)="createNewPost($event)"
     [canAdd]="canAdd"
     (scrolled)="fetchMore($event)"
@@ -25,7 +25,7 @@ export class PostsListContainerComponent implements OnInit, OnDestroy {
 
   postsList!: Observable<IPost[] | null>;
   meta!: Observable<IListMeta | null>;
-  currentUser!: Observable<IUser | null>;
+  currentUser!: IUser | null;
 
   private limit = 10;
   private page = 1;
@@ -34,10 +34,14 @@ export class PostsListContainerComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.postsHelper.resetState();
-    this.postsHelper.fetchPosts(this.limit, this.page);
     this.postsList = this.postsHelper.posts();
     this.meta = this.postsHelper.meta();
-    this.currentUser = this.profileHelper.profile();
+    this.profileHelper.profile().subscribe((user: IUser | null) => {
+      this.postsHelper.resetState();
+      this.currentUser = user;
+      this.page = 1;
+      this.postsHelper.fetchPosts(this.limit, this.page);
+    });
   }
 
   ngOnDestroy(): void {
