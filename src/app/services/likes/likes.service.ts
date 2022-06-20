@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ILike, ILikeData, IPost } from 'src/app/posts/utils/interfaces';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LikesService {
-  private baseUrl = 'http://localhost:3000';
+  private baseUrl = environment.baseUrl;
 
   constructor(private httpClient: HttpClient) {}
 
