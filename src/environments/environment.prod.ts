@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://botmind-test-angular.herokuapp.com'
+  baseUrl: 'https://botmind-test-api.herokuapp.com'
 };
