@@ -4,6 +4,8 @@ import { UserFeedComponent } from '@app/users/components/user-feed/user-feed.com
 import { UserFeedContainerComponent } from './user-feed-container.component';
 import * as fromRoot from '@store/index';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Actions } from '@ngrx/effects';
 
 describe('UserFeedContainerComponent', () => {
   let component: UserFeedContainerComponent;
@@ -13,7 +15,8 @@ describe('UserFeedContainerComponent', () => {
     await TestBed.configureTestingModule({
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       declarations: [UserFeedContainerComponent, UserFeedComponent],
-      imports: [StoreModule.forRoot(fromRoot.reducers)]
+      imports: [StoreModule.forRoot(fromRoot.reducers), RouterTestingModule],
+      providers: [Actions]
     }).compileComponents();
   });
 
