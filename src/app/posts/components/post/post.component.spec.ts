@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { SharedModule } from '@app/shared/shared.module';
+import { TranslateModule } from '@ngx-translate/core';
 import { PostComponent } from './post.component';
 
 describe('PostComponent', () => {
@@ -7,7 +10,8 @@ describe('PostComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PostComponent]
+      declarations: [PostComponent],
+      imports: [RouterTestingModule, TranslateModule.forRoot(), SharedModule]
     }).compileComponents();
   });
 
