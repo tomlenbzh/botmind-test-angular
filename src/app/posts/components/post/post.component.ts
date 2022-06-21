@@ -169,11 +169,26 @@ export class PostComponent implements OnChanges {
     }
   }
 
+  /**
+   * Sets the current post image with or without timestamp.
+   */
   private setProfileImage(): void {
+    let image = null;
+
     if (this.isAuthor) {
-      this.profileImage = this.currentUser?.image ? this.currentUser.image : this.placeholder;
+      if (this.currentUser?.image) {
+        if (this.currentUser.image === this.post.user?.image) {
+          image = this.currentUser.image || this.placeholder;
+        } else {
+          image = `${this.currentUser.image}?${Date.now()}` || this.placeholder;
+        }
+      } else {
+        image = this.placeholder;
+      }
     } else {
-      this.profileImage = this.post.user?.image || this.placeholder;
+      image = this.post.user?.image || this.placeholder;
     }
+
+    this.profileImage = image;
   }
 }
