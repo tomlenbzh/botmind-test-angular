@@ -68,8 +68,8 @@ export class PostFormComponent implements OnInit, OnChanges {
    */
   private createForm(): void {
     this.form = this.formBuilder.group({
-      [this.controlNames.TITLE]: new FormControl('', [Validators.required, Validators.maxLength(50)]),
-      [this.controlNames.BODY]: new FormControl('', [Validators.required, Validators.maxLength(500)])
+      [this.controlNames.TITLE]: new FormControl('', [Validators.required, Validators.maxLength(this.titleMaxLength)]),
+      [this.controlNames.BODY]: new FormControl('', [Validators.required, Validators.maxLength(this.bodyMaxLength)])
     });
   }
 
