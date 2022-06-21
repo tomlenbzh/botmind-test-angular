@@ -20,7 +20,7 @@ export class ProfileComponent implements OnChanges {
 
   dialogRef!: MatDialogRef<any>;
   placeholder = 'https://www.in.gov/bmv/images/profile-placeholder.png';
-  profileImage: string | null = null;
+  profileImage: string = '';
 
   get isUserFeed(): boolean {
     return this.profile?.id && this.router.url === `/app/users/${this.profile.id}` ? true : false;

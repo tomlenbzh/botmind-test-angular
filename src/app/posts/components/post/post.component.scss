@@ -1,7 +1,8 @@
 @import '../../../../scss/variables.scss';
 
 .post-card {
-  margin-bottom: 20px;
+  max-width: 700px;
+  margin: 0 auto 20px;
 
   .post-header {
     display: flex;

@@ -18,7 +18,7 @@ export class UserInfoComponent implements OnChanges {
   @ViewChild('editProfileDialog') editProfileDialog!: any;
 
   placeholder = 'https://www.in.gov/bmv/images/profile-placeholder.png';
-  userImage: string | null = null;
+  userImage: string = '';
   dialogRef!: MatDialogRef<any>;
   form!: FormGroup;
   inputNames = ProfileFormName;

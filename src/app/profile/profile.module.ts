@@ -5,10 +5,18 @@ import { components } from './components';
 import { SharedModule } from '../shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 @NgModule({
   declarations: [...containers, ...components],
-  imports: [CommonModule, SharedModule, TranslateModule.forChild(), FormsModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    SharedModule,
+    TranslateModule.forChild(),
+    FormsModule,
+    ReactiveFormsModule,
+    LazyLoadImageModule
+  ],
   exports: [...containers, ...components]
 })
 export class ProfileModule {}

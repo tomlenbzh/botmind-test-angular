@@ -7,6 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 @NgModule({
   declarations: [...components, ...containers],
@@ -17,7 +18,8 @@ import { TranslateModule } from '@ngx-translate/core';
     InfiniteScrollModule,
     FormsModule,
     ReactiveFormsModule,
-    TranslateModule.forChild()
+    TranslateModule.forChild(),
+    LazyLoadImageModule
   ],
   exports: [...components, ...containers]
 })

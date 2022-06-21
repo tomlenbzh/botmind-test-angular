@@ -1,6 +1,12 @@
 <div class="user">
   <div class="user-content">
-    <img [src]="userImage || placeholder" class="user-image" [alt]="user?.userName" />
+    <img
+      [defaultImage]="placeholder"
+      [lazyLoad]="userImage"
+      [errorImage]="placeholder"
+      class="user-image"
+      [alt]="user?.userName"
+    />
 
     <!-- +++++ PROFILE INFO +++++ -->
     <div class="user-info">

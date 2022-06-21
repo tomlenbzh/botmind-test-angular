@@ -8,6 +8,7 @@ import { PostsModule } from '../posts/posts.module';
 import { ProfileModule } from '../profile/profile.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 @NgModule({
   declarations: [...components, ...containers],
@@ -19,7 +20,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ProfileModule,
     TranslateModule.forChild(),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LazyLoadImageModule
   ]
 })
 export class UsersModule {}

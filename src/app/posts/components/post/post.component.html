@@ -1,7 +1,13 @@
 <mat-card class="post-card">
   <div class="post-header">
     <div class="post-info">
-      <img [src]="profileImage || placeholder" class="user-image" [alt]="currentUser?.userName" />
+      <img
+        [defaultImage]="placeholder"
+        [lazyLoad]="profileImage"
+        [errorImage]="placeholder"
+        class="user-image"
+        [alt]="currentUser?.userName"
+      />
       <div class="user-info">
         <p class="user-name text-bold" [textContent]="post?.user?.userName" (click)="gotToUser()"></p>
         <p class="date-created" [textContent]="updatedAt"></p>

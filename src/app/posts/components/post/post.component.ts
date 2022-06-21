@@ -31,7 +31,7 @@ export class PostComponent implements OnChanges {
   currentUserLike!: ILike;
   placeholder = 'https://www.in.gov/bmv/images/profile-placeholder.png';
   updatedAt!: string;
-  profileImage: string | null = null;
+  profileImage: string = '';
 
   constructor(private router: Router, private dialog: MatDialog, private translate: TranslateService) {}
 

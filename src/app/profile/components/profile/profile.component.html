@@ -1,5 +1,12 @@
 <div class="profile" *ngIf="!header">
-  <img [src]="profileImage || placeholder" class="profile-image" [alt]="profile?.userName" />
+  <img
+    [defaultImage]="placeholder"
+    [lazyLoad]="profileImage"
+    [errorImage]="placeholder"
+    class="profile-image"
+    [alt]="profile?.userName"
+  />
+
   <div class="profile-info text-center">
     <!-- +++++ PROFILE INFO +++++ -->
     <div class="info">
