@@ -3,6 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { SharedModule } from '@app/shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { PostComponent } from './post.component';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 describe('PostComponent', () => {
   let component: PostComponent;
@@ -11,7 +12,7 @@ describe('PostComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [PostComponent],
-      imports: [RouterTestingModule, TranslateModule.forRoot(), SharedModule]
+      imports: [RouterTestingModule, TranslateModule.forRoot(), SharedModule, LazyLoadImageModule]
     }).compileComponents();
   });
 

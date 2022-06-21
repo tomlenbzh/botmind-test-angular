@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { SharedModule } from '@app/shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProfileComponent } from './profile.component';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
@@ -12,7 +13,14 @@ describe('ProfileComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ProfileComponent],
-      imports: [RouterTestingModule, SharedModule, ReactiveFormsModule, FormsModule, TranslateModule.forRoot()]
+      imports: [
+        RouterTestingModule,
+        SharedModule,
+        ReactiveFormsModule,
+        FormsModule,
+        TranslateModule.forRoot(),
+        LazyLoadImageModule
+      ]
     }).compileComponents();
   });
 

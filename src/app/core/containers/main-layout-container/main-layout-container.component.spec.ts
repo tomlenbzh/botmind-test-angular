@@ -11,6 +11,7 @@ import { ProfileComponent } from '@app/profile/components/profile/profile.compon
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProfileHelper } from '@app/store/profile/profile.helper';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 describe('MainLayoutContainerComponent', () => {
   let component: MainLayoutContainerComponent;
@@ -26,7 +27,8 @@ describe('MainLayoutContainerComponent', () => {
         RouterTestingModule,
         BrowserAnimationsModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        LazyLoadImageModule
       ],
       providers: [ProfileHelper]
     }).compileComponents();

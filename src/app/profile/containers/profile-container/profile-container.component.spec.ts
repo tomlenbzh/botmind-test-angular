@@ -9,6 +9,7 @@ import { ProfileHelper } from '@app/store/profile/profile.helper';
 import { MaterialModule } from '@app/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 describe('ProfileContainerComponent', () => {
   let component: ProfileContainerComponent;
@@ -24,7 +25,8 @@ describe('ProfileContainerComponent', () => {
         MaterialModule,
         FormsModule,
         ReactiveFormsModule,
-        TranslateModule.forRoot()
+        TranslateModule.forRoot(),
+        LazyLoadImageModule
       ],
       providers: [ProfileHelper]
     }).compileComponents();

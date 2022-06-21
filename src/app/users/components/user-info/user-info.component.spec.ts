@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from '@app/shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { UserInfoComponent } from './user-info.component';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 describe('UserInfoComponent', () => {
   let component: UserInfoComponent;
@@ -12,7 +13,14 @@ describe('UserInfoComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [UserInfoComponent],
-      imports: [TranslateModule.forRoot(), SharedModule, BrowserAnimationsModule, FormsModule, ReactiveFormsModule]
+      imports: [
+        TranslateModule.forRoot(),
+        SharedModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        LazyLoadImageModule
+      ]
     }).compileComponents();
   });
 

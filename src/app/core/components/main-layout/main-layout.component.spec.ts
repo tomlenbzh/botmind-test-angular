@@ -9,6 +9,7 @@ import * as fromRoot from '@store/index';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ProfileComponent } from '@app/profile/components/profile/profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 describe('MainLayoutComponent', () => {
   let component: MainLayoutComponent;
@@ -24,7 +25,8 @@ describe('MainLayoutComponent', () => {
         BrowserAnimationsModule,
         RouterTestingModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        LazyLoadImageModule
       ]
     }).compileComponents();
   });
