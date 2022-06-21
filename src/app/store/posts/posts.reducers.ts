@@ -103,18 +103,15 @@ export const postsReducer = createReducer(
   on(REMOVE_LIKE_POST_ERROR_ACTION, (state: PostsState): PostsState => ({ ...state })),
   on(RESET_POSTS_STATE_ACTION, (): PostsState => initialState),
   on(COMMENT_POSTS_ACTION, (state: PostsState): PostsState => ({ ...state })),
-  on(COMMENT_POSTS_SUCCESS_ACTION, (state: PostsState, { post }): PostsState => {
-    const newPost = state.posts.find((p: IPost) => p.id === post.id) || post;
-    const comments = post?.comments ? post.comments : [];
-    newPost!.comments = comments;
-
-    const newState = {
+  on(
+    COMMENT_POSTS_SUCCESS_ACTION,
+    (state: PostsState, { post }): PostsState => ({
       ...state,
       isLoading: false,
-      posts: [...state.posts, newPost]
-    };
-
-    return newState;
-  }),
+      posts: state.posts?.map((statePost) =>
+        statePost.id === post.id ? { ...statePost, comments: post.comments } : statePost
+      )
+    })
+  ),
   on(COMMENT_POSTS_ERROR_ACTION, (state: PostsState): PostsState => ({ ...state }))
 );

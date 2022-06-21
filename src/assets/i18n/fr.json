@@ -95,6 +95,11 @@
       "NO": "Annuler"
     }
   },
+  "COMMENTS": {
+    "NO_COMMENTS_YET": "Aucun commentaire",
+    "ADD_COMMENT": "Ajouter un commentaire",
+    "ADD_COMMENT_PLACEHOLDER": "Ce post est génial !"
+  },
   "PROFILE": {
     "GO_TO_MY_FEED": "Voir mon feed",
     "GO_TO_ALL_POSTS": "Voir le fil d'actu",

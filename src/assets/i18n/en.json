@@ -95,6 +95,11 @@
       "NO": "Annuler"
     }
   },
+  "COMMENTS": {
+    "NO_COMMENTS_YET": "No comments yet",
+    "ADD_COMMENT": "Add a comment",
+    "ADD_COMMENT_PLACEHOLDER": "This post is awesome!"
+  },
   "PROFILE": {
     "GO_TO_MY_FEED": "Go to my feed",
     "GO_TO_ALL_POSTS": "See all posts",

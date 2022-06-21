@@ -26,8 +26,6 @@ export class PostCommentItemComponent implements OnChanges {
     }
   }
 
-  deleteComment(): void {}
-
   navigateToUserFeed(): void {
     const userId = this.comment.user.id;
     userId && this.router.navigateByUrl(`/app/users/${userId}`);
