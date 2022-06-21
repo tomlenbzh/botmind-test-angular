@@ -22,7 +22,6 @@ export class UnauthorizedInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((error: Error) => {
         if (error instanceof HttpErrorResponse && error.status === 401 && !this.router.url.includes('/auth')) {
-          console.log('401', this.router.url);
           this.router.navigateByUrl('/auth');
           localStorage.removeItem(ACCESS_TOKEN);
         }

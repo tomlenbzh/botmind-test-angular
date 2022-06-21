@@ -40,11 +40,7 @@ export class PostComponent implements OnChanges {
       if (this.currentUser) {
         if (this.post.user?.id && this.currentUser.id) {
           this.checkIsAuthor(this.post.user?.id, this.currentUser.id);
-          if (this.isAuthor) {
-            this.profileImage = this.currentUser.image ? `${this.currentUser.image}?${Date.now()}` : this.placeholder;
-          } else {
-            this.profileImage = this.post.user.image || this.placeholder;
-          }
+          this.setProfileImage();
         }
 
         if (this.post.likes) {
@@ -170,6 +166,14 @@ export class PostComponent implements OnChanges {
     if (this.likedByCurrentUser) {
       const currentUserLike = likes.find((like: ILike) => like.user.id === currentUser.id);
       if (currentUserLike) this.currentUserLike = currentUserLike;
+    }
+  }
+
+  private setProfileImage(): void {
+    if (this.isAuthor) {
+      this.profileImage = this.currentUser?.image ? this.currentUser.image : this.placeholder;
+    } else {
+      this.profileImage = this.post.user?.image || this.placeholder;
     }
   }
 }

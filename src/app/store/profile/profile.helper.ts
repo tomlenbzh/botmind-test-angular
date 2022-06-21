@@ -21,7 +21,6 @@ export class ProfileHelper {
   }
 
   fetchProfile(id: number): void {
-    console.log('FETCH PROFILE');
     this.store.dispatch(FETCH_PROFILE_ACTION({ id }));
   }
 

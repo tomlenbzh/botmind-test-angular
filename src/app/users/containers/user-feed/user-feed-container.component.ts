@@ -73,7 +73,6 @@ export class UserFeedContainerComponent implements OnInit, OnDestroy {
 
   updateProfile(profile: IUser): void {
     if (profile.id) {
-      console.log('UPDATE PROFILE');
       this.userHelper.updateUser(profile.id, profile);
     }
   }
