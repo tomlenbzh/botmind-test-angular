@@ -1,0 +1,22 @@
+<form [formGroup]="form" #formDirective="ngForm" (ngSubmit)="submitForm(formDirective)" class="post-comment-form">
+  <!-- <h4 [textContent]="(!editMode ? 'COMMENT.TITLE' : 'COMMENT.EDIT') | translate"></h4> -->
+
+  <!-- +++++ BODY FIELD +++++ -->
+  <mat-form-field appearance="outline">
+    <mat-label [textContent]="'YOUR_COMMENT' | translate"></mat-label>
+    <textarea
+      matInput
+      cdkTextareaAutosize
+      #autosize="cdkTextareaAutosize"
+      cdkAutosizeMinRows="1"
+      cdkAutosizeMaxRows="5"
+      [placeholder]="'YOUR_COMMENT' | translate"
+      class="post-body"
+      [formControlName]="controlNames.COMMENT"
+    ></textarea>
+
+    <button matSuffix mat-icon-button type="submit">
+      <mat-icon>send</mat-icon>
+    </button>
+  </mat-form-field>
+</form>

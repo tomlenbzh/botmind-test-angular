@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 
 import { IUser } from '@auth/utils/interfaces';
-import { ILike, ILikeData, IPost } from '../../utils/interfaces';
+import { IComment, ILike, ILikeData, IPost } from '../../utils/interfaces';
 
 @Component({
   selector: 'app-post',
@@ -20,6 +20,7 @@ export class PostComponent implements OnChanges {
   @Output() removelike: EventEmitter<ILikeData> = new EventEmitter<ILikeData>();
   @Output() delete: EventEmitter<number> = new EventEmitter<number>();
   @Output() edit: EventEmitter<IPost> = new EventEmitter<IPost>();
+  @Output() commentAdded: EventEmitter<IComment> = new EventEmitter<IComment>();
 
   @ViewChild('deletePostDialog') deletePostDialog!: any;
 
@@ -51,6 +52,10 @@ export class PostComponent implements OnChanges {
 
       this.updatedAt = moment(this.post.updatedAt).locale(this.translate.currentLang).fromNow();
     }
+  }
+
+  addNewComment(comment: IComment): void {
+    this.commentAdded.emit(comment);
   }
 
   /**

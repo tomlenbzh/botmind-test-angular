@@ -26,6 +26,7 @@ export interface IPost {
   updatedAt?: Date;
   user?: IUser;
   likes?: ILike[];
+  comments?: IComment[];
 }
 
 export interface IPostsList {
@@ -41,5 +42,19 @@ export interface ILike {
 
 export interface ILikeData {
   likeId: number;
+  post: IPartialPost;
+}
+
+export interface IComment {
+  id?: number;
+  createdAt?: Date;
+  updatedAt?: Date;
+  user: IUser;
+  post: IPost;
+  content: string;
+}
+
+export interface ICommentData {
+  commentId: number;
   post: IPartialPost;
 }

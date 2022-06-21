@@ -1,0 +1,22 @@
+<div class="comment">
+  <img
+    [defaultImage]="placeholder"
+    [lazyLoad]="profileImage"
+    [errorImage]="placeholder"
+    class="user-image"
+    [alt]="comment?.user?.userName"
+  />
+
+  <div class="comment-info">
+    <p class="mb5">
+      <span
+        class="username cursor-pointer"
+        [textContent]="comment?.user?.userName"
+        (click)="navigateToUserFeed()"
+      ></span>
+      &#8226;
+      <span class="updated-at" [textContent]="updatedAt"></span>
+    </p>
+    <p class="nomargin" [textContent]="comment?.content"></p>
+  </div>
+</div>

@@ -1,3 +1,7 @@
-<app-user-info [user]="currentUser" [profile]="profile" (profileUpdated)="updateProfile($event)"></app-user-info>
+<div class="user-feed" infinite-scroll [scrollWindow]="false" (scrolled)="onScroll()">
+  <!-- +++++ USER INFORMATRION +++++ -->
+  <app-user-info [user]="currentUser" [profile]="profile" (profileUpdated)="updateProfile($event)"></app-user-info>
 
-<app-posts-list-container [canAdd]="false"></app-posts-list-container>
+  <!-- +++++ POSTS LIST +++++ -->
+  <app-posts-list-container [canAdd]="false" [canFetch]="false"></app-posts-list-container>
+</div>

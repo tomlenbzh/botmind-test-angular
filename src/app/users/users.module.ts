@@ -9,6 +9,7 @@ import { ProfileModule } from '../profile/profile.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [...components, ...containers],
@@ -21,7 +22,8 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
     TranslateModule.forChild(),
     FormsModule,
     ReactiveFormsModule,
-    LazyLoadImageModule
+    LazyLoadImageModule,
+    InfiniteScrollModule
   ]
 })
 export class UsersModule {}

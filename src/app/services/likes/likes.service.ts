@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ILike, ILikeData, IPost } from 'src/app/posts/utils/interfaces';
+import { ILike, ILikeData, IPost } from '@posts/utils/interfaces';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

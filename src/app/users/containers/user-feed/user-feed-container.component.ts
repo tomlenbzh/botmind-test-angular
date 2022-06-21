@@ -15,7 +15,9 @@ import { userActionTypes } from '@app/store/user/user.actions.types';
   template: `<app-user-feed
     [currentUser]="currentUser | async"
     [profile]="profile | async"
+    [meta]="meta | async"
     (profileUpdated)="updateProfile($event)"
+    (scrolled)="fetchMore($event)"
   ></app-user-feed>`
 })
 export class UserFeedContainerComponent implements OnInit, OnDestroy {
@@ -56,6 +58,7 @@ export class UserFeedContainerComponent implements OnInit, OnDestroy {
       .subscribe((action: any) => {
         const user: IUser = action.user;
         user?.id && this.profileHelper.fetchProfile(user.id);
+        user?.id && this.postsHelper.fetchPosts(this.limit, this.page, user.id);
       });
   }
 

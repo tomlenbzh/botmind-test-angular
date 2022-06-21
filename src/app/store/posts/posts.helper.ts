@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { ILike, ILikeData, IListMeta, IPost } from 'src/app/posts/utils/interfaces';
+import { IComment, ICommentData, ILike, ILikeData, IListMeta, IPost } from '@posts/utils/interfaces';
 import { AppState } from 'src/app/store';
 import { IUser } from '../../auth/utils/interfaces';
 import {
+  COMMENT_POSTS_ACTION,
   CREATE_POST_ACTION,
   DELETE_POST_ACTION,
   FETCH_POSTS_ACTION,
   LIKE_POST_ACTION,
+  REMOVE_COMMENT_POSTS_ACTION,
   REMOVE_LIKE_POST_ACTION,
   RESET_POSTS_STATE_ACTION,
   UPDATE_POST_ACTION
@@ -52,6 +54,14 @@ export class PostsHelper {
 
   removeLikePost(data: ILikeData): void {
     this.store.dispatch(REMOVE_LIKE_POST_ACTION({ data }));
+  }
+
+  commentPost(comment: IComment): void {
+    this.store.dispatch(COMMENT_POSTS_ACTION({ comment }));
+  }
+
+  removeCommentPost(data: ICommentData): void {
+    this.store.dispatch(REMOVE_COMMENT_POSTS_ACTION({ data }));
   }
 
   resetState(): void {

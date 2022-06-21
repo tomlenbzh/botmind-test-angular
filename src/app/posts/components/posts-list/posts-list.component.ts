@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IUser } from '@auth/utils/interfaces';
-import { ILike, ILikeData, IListMeta, IPost } from '../../utils/interfaces';
+import { IComment, ILike, ILikeData, IListMeta, IPost } from '../../utils/interfaces';
 
 @Component({
   selector: 'app-posts-list',
@@ -12,6 +12,7 @@ export class PostsListComponent {
   @Input() meta!: IListMeta | null;
   @Input() currentUser!: IUser | null;
   @Input() canAdd = true;
+  @Input() canFetch = true;
 
   @Output() postSubmitted: EventEmitter<IPost> = new EventEmitter<IPost>();
   @Output() scrolled: EventEmitter<IListMeta> = new EventEmitter<IListMeta>();
@@ -19,9 +20,14 @@ export class PostsListComponent {
   @Output() removeLike: EventEmitter<ILikeData> = new EventEmitter<ILikeData>();
   @Output() delete: EventEmitter<number> = new EventEmitter<number>();
   @Output() edit: EventEmitter<IPost> = new EventEmitter<IPost>();
+  @Output() commentAdded: EventEmitter<IComment> = new EventEmitter<IComment>();
 
   onScroll(): void {
     if (this.meta) this.scrolled.emit(this.meta);
+  }
+
+  addNewComment(comment: IComment): void {
+    this.commentAdded.emit(comment);
   }
 
   /**

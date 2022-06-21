@@ -1,6 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
-import { IListMeta, IPost } from 'src/app/posts/utils/interfaces';
+import { IListMeta, IPost } from '@posts/utils/interfaces';
 import {
+  COMMENT_POSTS_ACTION,
+  COMMENT_POSTS_ERROR_ACTION,
+  COMMENT_POSTS_SUCCESS_ACTION,
   CREATE_POST_ACTION,
   CREATE_POST_ERROR_ACTION,
   CREATE_POST_SUCCESS_ACTION,
@@ -98,5 +101,20 @@ export const postsReducer = createReducer(
     })
   ),
   on(REMOVE_LIKE_POST_ERROR_ACTION, (state: PostsState): PostsState => ({ ...state })),
-  on(RESET_POSTS_STATE_ACTION, (): PostsState => initialState)
+  on(RESET_POSTS_STATE_ACTION, (): PostsState => initialState),
+  on(COMMENT_POSTS_ACTION, (state: PostsState): PostsState => ({ ...state })),
+  on(COMMENT_POSTS_SUCCESS_ACTION, (state: PostsState, { post }): PostsState => {
+    const newPost = state.posts.find((p: IPost) => p.id === post.id) || post;
+    const comments = post?.comments ? post.comments : [];
+    newPost!.comments = comments;
+
+    const newState = {
+      ...state,
+      isLoading: false,
+      posts: [...state.posts, newPost]
+    };
+
+    return newState;
+  }),
+  on(COMMENT_POSTS_ERROR_ACTION, (state: PostsState): PostsState => ({ ...state }))
 );

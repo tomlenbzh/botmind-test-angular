@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, exhaustMap, map } from 'rxjs/operators';
-import { IPost } from 'src/app/posts/utils/interfaces';
+import { IPost } from '@posts/utils/interfaces';
 import { LikesService } from 'src/app/services/likes/likes.service';
 import { PostsService } from 'src/app/services/posts/posts.service';
 import {
@@ -22,12 +22,24 @@ import {
   DELETE_POST_SUCCESS_ACTION,
   DELETE_POST_ERROR_ACTION,
   UPDATE_POST_ACTION,
-  UPDATE_POST_SUCCESS_ACTION
+  UPDATE_POST_SUCCESS_ACTION,
+  COMMENT_POSTS_ACTION,
+  COMMENT_POSTS_SUCCESS_ACTION,
+  COMMENT_POSTS_ERROR_ACTION,
+  REMOVE_COMMENT_POSTS_ACTION,
+  REMOVE_COMMENT_POSTS_SUCCESS_ACTION,
+  REMOVE_COMMENT_POSTS_ERROR_ACTION
 } from './posts.actions';
+import { CommentsService } from '@app/services/comments/comments.service';
 
 @Injectable()
 export class PostsEffects {
-  constructor(private actions$: Actions, private postsService: PostsService, private likesService: LikesService) {}
+  constructor(
+    private actions$: Actions,
+    private postsService: PostsService,
+    private likesService: LikesService,
+    private commentsService: CommentsService
+  ) {}
 
   fetchPosts$ = createEffect(() => {
     return this.actions$.pipe(
@@ -96,6 +108,30 @@ export class PostsEffects {
         return this.likesService.removeLike(action.data).pipe(
           map((post: IPost) => REMOVE_LIKE_POST_SUCCESS_ACTION({ post })),
           catchError((error) => of(REMOVE_LIKE_POST_ERROR_ACTION({ error })))
+        );
+      })
+    );
+  });
+
+  commentPost = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(COMMENT_POSTS_ACTION),
+      exhaustMap((action) => {
+        return this.commentsService.createComment(action.comment).pipe(
+          map((post: IPost) => COMMENT_POSTS_SUCCESS_ACTION({ post })),
+          catchError((error) => of(COMMENT_POSTS_ERROR_ACTION({ error })))
+        );
+      })
+    );
+  });
+
+  removeCommentePost = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(REMOVE_COMMENT_POSTS_ACTION),
+      exhaustMap((action) => {
+        return this.commentsService.removeComment(action.data).pipe(
+          map((post: IPost) => REMOVE_COMMENT_POSTS_SUCCESS_ACTION({ post })),
+          catchError((error) => of(REMOVE_COMMENT_POSTS_ERROR_ACTION({ error })))
         );
       })
     );

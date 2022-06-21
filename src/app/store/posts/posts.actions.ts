@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
-import { ILike, ILikeData, IListMeta, IPost } from 'src/app/posts/utils/interfaces';
+import { IComment, ICommentData, ILike, ILikeData, IListMeta, IPost } from '@posts/utils/interfaces';
 import { PostsActionTypes } from './posts.actions.types';
 
 /**
@@ -69,6 +69,35 @@ export const REMOVE_LIKE_POST_SUCCESS_ACTION = createAction(
 );
 export const REMOVE_LIKE_POST_ERROR_ACTION = createAction(
   PostsActionTypes.REMOVE_LIKE_POSTS_ERROR,
+  props<{ error: HttpErrorResponse }>()
+);
+
+/**
+ * ADD COMMENTS ACTIONS
+ */
+export const COMMENT_POSTS_ACTION = createAction(PostsActionTypes.COMMENT_POSTS, props<{ comment: IComment }>());
+export const COMMENT_POSTS_SUCCESS_ACTION = createAction(
+  PostsActionTypes.COMMENT_POSTS_SUCCESS,
+  props<{ post: IPost }>()
+);
+export const COMMENT_POSTS_ERROR_ACTION = createAction(
+  PostsActionTypes.COMMENT_POSTS_ERROR,
+  props<{ error: HttpErrorResponse }>()
+);
+
+/**
+ * REMOVE COMMENTS ACTIONS
+ */
+export const REMOVE_COMMENT_POSTS_ACTION = createAction(
+  PostsActionTypes.REMOVE_COMMENT_POSTS,
+  props<{ data: ICommentData }>()
+);
+export const REMOVE_COMMENT_POSTS_SUCCESS_ACTION = createAction(
+  PostsActionTypes.REMOVE_COMMENT_POSTS_SUCCESS,
+  props<{ post: IPost }>()
+);
+export const REMOVE_COMMENT_POSTS_ERROR_ACTION = createAction(
+  PostsActionTypes.REMOVE_COMMENT_POSTS_ERROR,
   props<{ error: HttpErrorResponse }>()
 );
 

@@ -1,8 +1,10 @@
 $toolbar-height: 64px;
 
 .posts-list {
-  height: 100%;
-  overflow: auto;
+  &.overflow {
+    height: 100%;
+    overflow: auto;
+  }
 }
 
 .no-posts {

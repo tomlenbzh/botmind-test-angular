@@ -5,6 +5,7 @@ import { ProfileContainerComponent } from '@app/profile/containers/profile-conta
 import { StoreModule } from '@ngrx/store';
 import { UserFeedComponent } from './user-feed.component';
 import * as fromRoot from '@store/index';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 describe('UserFeedComponent', () => {
   let component: UserFeedComponent;
@@ -14,7 +15,7 @@ describe('UserFeedComponent', () => {
     await TestBed.configureTestingModule({
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       declarations: [UserFeedComponent, ProfileContainerComponent, PostsListContainerComponent],
-      imports: [StoreModule.forRoot(fromRoot.reducers)]
+      imports: [StoreModule.forRoot(fromRoot.reducers), InfiniteScrollModule]
     }).compileComponents();
   });
 

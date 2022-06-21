@@ -1,4 +1,10 @@
-<div class="posts-list" infinite-scroll [scrollWindow]="false" (scrolled)="onScroll()">
+<div
+  class="posts-list"
+  infinite-scroll
+  [scrollWindow]="false"
+  (scrolled)="onScroll()"
+  [ngClass]="{ overflow: canFetch }"
+>
   <app-post-form *ngIf="canAdd" [currentUser]="currentUser" (postSubmitted)="submitPost($event)"></app-post-form>
 
   <div class="no-posts" *ngIf="posts?.length === 0" [textContent]="'POSTS.NO_POSTS' | translate"></div>
@@ -11,5 +17,6 @@
     (removelike)="removeLikePost($event)"
     (delete)="deletePost($event)"
     (edit)="editPost($event)"
+    (commentAdded)="addNewComment($event)"
   ></app-post>
 </div>

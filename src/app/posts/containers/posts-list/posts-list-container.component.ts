@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { IUser } from '@auth/utils/interfaces';
 import { PostsHelper } from '@app/store/posts/posts.helper';
 import { ProfileHelper } from '@app/store/profile/profile.helper';
-import { ILike, ILikeData, IListMeta, IPost } from '../../utils/interfaces';
+import { IComment, ILike, ILikeData, IListMeta, IPost } from '../../utils/interfaces';
 
 @Component({
   selector: 'app-posts-list-container',
@@ -14,15 +14,18 @@ import { ILike, ILikeData, IListMeta, IPost } from '../../utils/interfaces';
     [currentUser]="currentUser"
     (postSubmitted)="createNewPost($event)"
     [canAdd]="canAdd"
+    [canFetch]="canFetch"
     (scrolled)="fetchMore($event)"
     (like)="likePost($event)"
     (removeLike)="removeLikePost($event)"
     (delete)="deletePost($event)"
     (edit)="editPost($event)"
+    (commentAdded)="addNewComment($event)"
   ></app-posts-list>`
 })
 export class PostsListContainerComponent implements OnInit, OnDestroy {
   @Input() canAdd = true;
+  @Input() canFetch = true;
 
   postsList!: Observable<IPost[] | null>;
   meta!: Observable<IListMeta | null>;
@@ -41,13 +44,20 @@ export class PostsListContainerComponent implements OnInit, OnDestroy {
     this.profileHelper.profile().subscribe((user: IUser | null) => {
       this.postsHelper.resetState();
       this.currentUser = user;
-      this.page = 1;
-      this.postsHelper.fetchPosts(this.limit, this.page);
+
+      if (this.canFetch) {
+        this.page = 1;
+        this.postsHelper.fetchPosts(this.limit, this.page);
+      }
     });
   }
 
   ngOnDestroy(): void {
     this.postsHelper.resetState();
+  }
+
+  addNewComment(comment: IComment): void {
+    this.postsHelper.commentPost(comment);
   }
 
   /**
@@ -101,7 +111,7 @@ export class PostsListContainerComponent implements OnInit, OnDestroy {
    * @param     { IPost }     post
    */
   fetchMore(meta: IListMeta): void {
-    if (meta.totalPages !== this.page) {
+    if (meta.totalPages !== this.page && this.canFetch) {
       this.page = meta.currentPage + 1;
       this.postsHelper.fetchPosts(this.limit, this.page);
     }

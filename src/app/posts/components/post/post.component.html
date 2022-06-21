@@ -23,7 +23,8 @@
         (click)="manageLikes()"
       >
         <div *ngIf="likes > 0" class="likes-count" [textContent]="likes"></div>
-        <mat-icon>favorite</mat-icon>
+        <mat-icon *ngIf="likedByCurrentUser">favorite</mat-icon>
+        <mat-icon *ngIf="!likedByCurrentUser">favorite_border</mat-icon>
       </button>
 
       <button
@@ -43,7 +44,7 @@
         [matTooltip]="'POSTS.ACTIONS.DELETE' | translate"
         (click)="openDeleteModal()"
       >
-        <mat-icon>delete</mat-icon>
+        <mat-icon>delete_outline</mat-icon>
       </button>
     </div>
   </div>
@@ -62,6 +63,14 @@
       (editCancelled)="toggleEdit()"
     ></app-post-form>
   </ng-template>
+
+  <!-- +++++ COMMENTS AREA +++++ -->
+  <app-post-comments
+    *ngIf="!isEditing"
+    [post]="post"
+    [currentUser]="currentUser"
+    (commentAdded)="addNewComment($event)"
+  ></app-post-comments>
 </mat-card>
 
 <ng-template #deletePostDialog>

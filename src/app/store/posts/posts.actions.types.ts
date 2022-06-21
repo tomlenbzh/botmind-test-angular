@@ -17,5 +17,11 @@ export enum PostsActionTypes {
   REMOVE_LIKE_POSTS = '[POSTS] Remove like Post',
   REMOVE_LIKE_POSTS_SUCCESS = '[POSTS] Remove like Post Success',
   REMOVE_LIKE_POSTS_ERROR = '[POSTS] Remove like Post Error',
-  RESET_POSTS_STATE = '[POSTS] Reset post state'
+  RESET_POSTS_STATE = '[POSTS] Reset post state',
+  COMMENT_POSTS = '[POSTS] Comment Post',
+  COMMENT_POSTS_SUCCESS = '[POSTS] Comment Post Success',
+  COMMENT_POSTS_ERROR = '[POSTS] Comment Post Error',
+  REMOVE_COMMENT_POSTS = '[POSTS] Remove comment post',
+  REMOVE_COMMENT_POSTS_SUCCESS = '[POSTS] Remove comment post Success',
+  REMOVE_COMMENT_POSTS_ERROR = '[POSTS] Remove comment post Error'
 }

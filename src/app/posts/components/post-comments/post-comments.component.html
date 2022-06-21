@@ -1,0 +1,13 @@
+<app-post-comments-form
+  [currentPost]="post"
+  [currentUser]="currentUser"
+  (commentAdded)="addNewComment($event)"
+></app-post-comments-form>
+
+<ng-container *ngIf="post && post?.comments && post.comments!.length > 0; else noPostsTemplate">
+  <div *ngFor="let comment of post.comments; let i = index" [ngClass]="{ mb10: i !== post.comments!.length - 1 }">
+    <app-post-comment-item [comment]="comment"></app-post-comment-item>
+  </div>
+</ng-container>
+
+<ng-template #noPostsTemplate> No comments for now </ng-template>
