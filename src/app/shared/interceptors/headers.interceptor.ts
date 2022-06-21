@@ -10,7 +10,7 @@ export class TokenInterceptor implements HttpInterceptor {
   private excludedUrls: Array<string>;
 
   constructor(private injector: Injector, private authHelper: AuthHelper) {
-    this.excludedUrls = ['login'];
+    this.excludedUrls = ['login', 'signup'];
   }
 
   /**
