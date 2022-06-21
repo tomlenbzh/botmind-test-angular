@@ -17,28 +17,28 @@
 
     <!-- +++++ PROFILE INFO +++++ -->
     <div class="actions">
-      <!-- +++++ GO TO MY FEED +++++ -->
-      <button
-        *ngIf="!isUserFeed"
-        mat-flat-button
-        color="primary"
-        [textContent]="'PROFILE.GO_TO_MY_FEED' | translate"
-        (click)="gotToMyFeed()"
-      ></button>
-
       <!-- +++++ SEE ALL POSTS +++++ -->
       <button
-        *ngIf="isUserFeed"
         mat-flat-button
         color="primary"
         [textContent]="'PROFILE.GO_TO_ALL_POSTS' | translate"
         (click)="gotToAllPosts()"
       ></button>
 
-      <!-- +++++ DELETE ACCOUNT +++++ -->
+      <!-- +++++ GO TO MY FEED +++++ -->
       <button
+        *ngIf="!isUserFeed"
         mat-flat-button
         color="accent"
+        [textContent]="'PROFILE.GO_TO_MY_FEED' | translate"
+        (click)="gotToMyFeed()"
+      ></button>
+
+      <!-- +++++ DELETE ACCOUNT +++++ -->
+      <button
+        class="mt50"
+        mat-flat-button
+        color="warn"
         [textContent]="'PROFILE.DELETE_PROFILE' | translate"
         (click)="openDeleteModal()"
       ></button>
